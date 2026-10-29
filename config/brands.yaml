@@ -18,8 +18,10 @@ brands:
   - code: UK-2
     name: BBC Natural History Unit / BBC Earth
     start_year: 2010          # 经典回补到 2006，见 includes.yaml
-    tmdb_networks: []         # 待查：BBC One / BBC Two 等播出方编号
-    tmdb_companies: []        # 待查：BBC Natural History Unit / BBC Studios Natural History Unit
+    tmdb_networks: [6852]     # BBC Earth 频道（Planet Earth II 等标的播出方）
+    tmdb_companies: [9050]    # BBC Studios Natural History Unit（Planet Earth III、Frozen Planet II 等）
+    # 注意：Planet Earth III 在 TMDB 上的播出方是 BBC One（4），不是 BBC Earth，所以必须同时按出品公司查。
+    # 另有一个出品公司“BBC Earth”（8090），只挂了一部西班牙语节目，不用。
     default_themes: [nature]
     notes: ""
     enabled: true
@@ -28,7 +30,7 @@ brands:
   - code: ST-1
     name: Netflix
     start_year: 2015
-    tmdb_networks: []         # 待查：Netflix 播出方编号
+    tmdb_networks: [213]      # Netflix
     tmdb_companies: []
     default_themes: []        # 综合品牌，主题逐条判断
     notes: 只收纪录片类型
@@ -38,7 +40,7 @@ brands:
   - code: UK-1
     name: BBC（Two / Four / Studios）
     start_year: 2010
-    tmdb_networks: []
+    tmdb_networks: [332]      # BBC Two；BBC One（4）、BBC Four 等在迭代 2a 决定是否加入
     tmdb_companies: []
     default_themes: []
     notes: Storyville 只收符合主题的

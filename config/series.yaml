@@ -13,10 +13,13 @@
 #   pilot        是否属于迭代 1 试点
 
 series:
-  # —— 迭代 1 试点 ——
-  - {key: nova, name: NOVA, tmdb_tv_id: null, brand_code: US-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
-  - {key: horizon, name: Horizon, tmdb_tv_id: null, brand_code: UK-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
-  - {key: inside-the-factory, name: Inside the Factory, tmdb_tv_id: null, brand_code: UK-1, themes: [engineering.manufacturing], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+  # —— 迭代 1 试点（编号已在 TMDB 网站核对）——
+  # NOVA 3562：PBS，1974 年开播，纪录片类型
+  # Horizon 1966：BBC Two，1964 年开播，纪录片类型（同名的 3583、33365 是别的节目）
+  # Inside the Factory 72793：BBC Two，2015 年开播，纪录片类型
+  - {key: nova, name: NOVA, tmdb_tv_id: 3562, brand_code: US-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+  - {key: horizon, name: Horizon, tmdb_tv_id: 1966, brand_code: UK-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+  - {key: inside-the-factory, name: Inside the Factory, tmdb_tv_id: 72793, brand_code: UK-1, themes: [engineering.manufacturing], per_episode: true, since_year: 2010, enabled: true, pilot: true}
 
   # —— 科学 ——
   - {key: sky-at-night, name: The Sky at Night, tmdb_tv_id: null, brand_code: UK-1, themes: [science.space], per_episode: true, since_year: 2010, enabled: true, pilot: false}
