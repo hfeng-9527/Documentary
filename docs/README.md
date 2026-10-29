@@ -3,7 +3,8 @@
 **当前有效：**
 - [`scope.md`](scope.md) — 正式收录范围 v1
 - [`tracking.md`](tracking.md) — 双周更新跟踪方案
-- [`plan.md`](plan.md) — 整体计划与交付物
+- [`plan.md`](plan.md) — 分步开发计划与进度
+- [`process.md`](process.md) — 开发流程规范（迭代、测试、验收、版本）
 - [`requirements.md`](requirements.md) — 需求说明
 - [`scenarios.md`](scenarios.md) — 使用场景与页面清单（草稿）
 - [`architecture.md`](architecture.md) — 技术架构

@@ -1,6 +1,6 @@
 # 技术架构（草稿）
 
-> 阶段 1 的交付物之二。依据 `requirements.md`（部署环境、内存预算、大模型模块）和 `tracking.md`（双周 / 月度任务）。
+> 阶段 1 的交付物之一。依据 `requirements.md`（部署环境、内存预算、大模型模块）和 `tracking.md`（双周 / 月度任务）。
 > 已经能定的直接写成结论；第 10 节记录已确认的决定和剩下的问题。
 
 ---
@@ -31,6 +31,73 @@
 ---
 
 ## 2. 系统结构
+
+本节有三张图，从不同角度看同一个系统：
+- **2.1 功能架构图**：系统由哪些功能组成，每块功能在哪个迭代做。
+- **2.2 运行结构图**：数据从哪里来、经过什么处理、到哪里去。
+- **2.3 部署结构图**：程序装在哪台机器上、怎么连起来。
+
+### 2.1 功能架构图
+
+```mermaid
+flowchart TB
+    subgraph UI["用户界面层（网页）"]
+        direction LR
+        U1["浏览与搜索<br/>列表 · 详情 · 搜索<br/>迭代 1"]
+        U2["下载决策<br/>待下载 · 最近新出品<br/>迭代 1 / 3"]
+        U3["审核<br/>逐条 · 整组 · 大模型建议<br/>迭代 1 / 7"]
+        U4["片源管理<br/>手动标记 · 未匹配处理<br/>迭代 1 / 2"]
+        U5["运维查看<br/>运行记录 · 人工补录<br/>迭代 3 / 6"]
+    end
+
+    subgraph BIZ["业务规则层"]
+        direction LR
+        B1["初筛规则<br/>时长 · 语种 · 主题 · 排除<br/>迭代 1 起逐步加"]
+        B2["评分门槛<br/>规则 A / B / C<br/>迭代 5 / 6"]
+        B3["状态流转<br/>跟踪状态 · 片源状态<br/>迭代 1"]
+        B4["报告与推送<br/>运行报告 · ntfy<br/>迭代 3"]
+    end
+
+    subgraph TASK["任务层（命令行，定时运行）"]
+        direction LR
+        T1["双周发现<br/>doc discover<br/>迭代 3"]
+        T2["月度刷新<br/>doc refresh<br/>迭代 5"]
+        T3["片源同步<br/>doc sync-jellyfin<br/>迭代 2"]
+        T4["全量回溯<br/>doc backfill<br/>迭代 1 小范围 / 7 全量"]
+        T5["备份<br/>doc backup<br/>迭代 4"]
+    end
+
+    subgraph SRC["数据来源层"]
+        direction LR
+        S1["TMDB<br/>迭代 1"]
+        S2["Jellyfin<br/>迭代 2"]
+        S3["YouTube<br/>迭代 3"]
+        S4["IMDb 数据包<br/>迭代 5"]
+        S5["豆瓣 · 中文平台<br/>迭代 6"]
+    end
+
+    subgraph BASE["基础层"]
+        direction LR
+        C1["配置<br/>.env · yaml"]
+        C2["数据库<br/>SQLite + 迁移"]
+        C3["网络<br/>代理 · 重试 · 限速"]
+        C4["日志"]
+    end
+
+    OPT["大模型标定（可选，独立）<br/>导出 → 标定 → 导入<br/>迭代 7"]
+
+    UI --> BIZ
+    TASK --> BIZ
+    TASK --> SRC
+    BIZ --> BASE
+    SRC --> BASE
+    OPT -.文件交换.-> TASK
+```
+
+- 上层调用下层，下层不知道上层的存在。比如“数据来源层”只负责把数据拿回来，不知道网页长什么样；以后换一个来源或加一个来源，不影响网页。
+- 大模型标定是虚线：只通过文件和主系统交换数据，不用它主系统照样完整可用。
+
+### 2.2 运行结构图
 
 ```
                          ┌──────────────────────────────────────────┐
@@ -72,6 +139,49 @@
 - 网页和任务共用同一个 SQLite 文件、同一套代码，只是入口不同。
 - 大模型模块和主服务之间只通过文件交换数据，主服务不依赖它。
 
+### 2.3 部署结构图
+
+```mermaid
+flowchart LR
+    subgraph PC["Windows 电脑（开发和验收）"]
+        direction TB
+        PCAPP["本应用<br/>直接用 Python 运行"]
+        PCDATA[("data/<br/>测试数据库")]
+        PCAPP --- PCDATA
+    end
+
+    subgraph PI["树莓派 4（正式运行，迭代 4 起）"]
+        direction TB
+        WEB["本应用 · 网页容器<br/>常驻，≤150MB"]
+        JOB["本应用 · 任务容器<br/>cron 启动，跑完退出，≤300MB"]
+        DATA[("SSD 数据目录<br/>数据库 · 备份 · 报告")]
+        JF["Jellyfin"]
+        V2["v2ray 代理"]
+        QB["qBittorrent / Immich"]
+        WEB --- DATA
+        JOB --- DATA
+        JOB -->|只读 API| JF
+        JOB --> V2
+    end
+
+    PHONE["手机<br/>浏览器 + ntfy"]
+    GH["GitHub<br/>只存代码、跑测试"]
+    EXT["境外：TMDB · IMDb · YouTube · ntfy.sh"]
+    CN["国内：豆瓣 · 央视网等"]
+
+    PC -->|git push| GH
+    GH -->|git pull 版本号| PI
+    PC -.Tailscale.-> PI
+    PHONE -.局域网 / Tailscale.-> WEB
+    V2 --> EXT
+    JOB -->|直连| CN
+    EXT -.推送.-> PHONE
+```
+
+- 电脑和树莓派运行**同一份代码**，区别只在 `.env` 配置。
+- 代码从电脑推到 GitHub，树莓派从 GitHub 拉取打了版本号的代码（`process.md` 第 3 节）。
+- 网页只在家庭局域网和 Tailscale 内可以访问，不暴露到公网。
+
 ---
 
 ## 3. 模块划分
@@ -86,7 +196,7 @@
 | `web` | 页面、筛选、搜索、审核操作、片源状态切换、运行报告展示 | 调用外部接口（网页只读写数据库） |
 | `cli` | 把上面各模块包装成命令（第 6 节） | |
 
-**审核放在网页里**（`requirements.md` 3.5），不单独做工具。这意味着阶段 4 需要先做出网页的最小骨架（审核页），阶段 6 再补齐其他页面。
+**审核放在网页里**（`requirements.md` 3.5），不单独做工具。审核页在迭代 1 就做（`plan.md`）。
 
 ### 3.1 各来源的要点
 
@@ -111,8 +221,8 @@ Documentary/
 ├── docker-compose.yml
 ├── alembic/                  # 数据库表结构迁移
 ├── config/
-│   ├── brands.yaml           # 品牌 → TMDB 播出方/公司 ID、起始年份、默认主题（阶段 2）
-│   ├── channels.yaml         # YouTube 频道 ID、类型、时长门槛、默认主题（阶段 2）
+│   ├── brands.yaml           # 品牌 → TMDB 播出方/公司 ID、起始年份、默认主题
+│   ├── channels.yaml         # YouTube 频道 ID、类型、时长门槛、默认主题
 │   └── rules.yaml            # 主题关键词、排除关键词、来源分类映射、评分门槛
 ├── src/documentary/
 │   ├── core/                 # config.py  db.py  models.py  http.py  logging.py
@@ -273,8 +383,9 @@ Windows 上默认放在项目旁边的 `data/`（已加进 `.gitignore`）。树
 | 任务报告与提醒 | 每次任务生成详细报告（第 6.1 节），并通过 **ntfy** 推送简要信息（第 6.2 节） |
 | 数据目录 | 树莓派整个系统在 SSD 上，数据目录放 SSD（默认 `/opt/documentary/data`） |
 | Windows 上测试 Jellyfin 同步 | 通过 Tailscale 直接连家里的 Jellyfin API，先 `--dry-run`，不需要拷贝媒体库（第 9.2 节） |
+| 技术选型 | 第 1 节：Python + FastAPI + SQLite + htmx，定时任务用树莓派 cron |
+| 实现方式 | 分步实现、按场景验收，见 `plan.md`、`process.md` |
 
 ### 待确认
 
-1. 第 1 节的技术选型（Python + FastAPI + SQLite + htmx + cron）是否同意。
-2. ntfy 先用公共的 ntfy.sh（随机 topic 名），还是一开始就在树莓派上自建？建议先用 ntfy.sh，跑起来再说。
+1. ntfy 先用公共的 ntfy.sh（随机 topic 名），还是一开始就在树莓派上自建？建议先用 ntfy.sh，跑起来再说。
