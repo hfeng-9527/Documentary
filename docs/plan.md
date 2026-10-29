@@ -253,6 +253,7 @@ flowchart LR
 - `计划中` 的作品一键推送到 qBittorrent（`requirements.md` 第 6 节）
 - 去重合并（`scope.md` 第 7.3 节）
 - 自建 ntfy
+- 个人信息：作品备注、想看优先级、看过没看过（`data-model.md` 第 7 节）
 
 ---
 

@@ -1,0 +1,52 @@
+# 主题标签（scope.md 第 6 节）。两级：大类 + 子类；key 用于其他配置文件引用。
+
+themes:
+  - key: science
+    name: 科学
+    children:
+      - {key: science.space, name: 宇宙/天文}
+      - {key: science.physics, name: 物理}
+      - {key: science.chemistry, name: 化学/材料}
+      - {key: science.life, name: 生命科学/进化}
+      - {key: science.medicine, name: 医学/人体}
+      - {key: science.math, name: 数学}
+      - {key: science.earth, name: 地球科学/气候}
+  - key: engineering
+    name: 工程技术
+    children:
+      - {key: engineering.megaprojects, name: 超级工程/建筑}
+      - {key: engineering.transport, name: 交通/航空航天}
+      - {key: engineering.manufacturing, name: 制造业}
+      - {key: engineering.energy, name: 能源}
+      - {key: engineering.accidents, name: 工程事故}
+      - {key: engineering.computing, name: 计算机/互联网/AI}
+  - key: history
+    name: 历史
+    children:
+      - {key: history.ancient, name: 古代文明/考古}
+      - {key: history.china, name: 中国史}
+      - {key: history.world, name: 世界史}
+      - {key: history.war, name: 战争/军事史}
+      - {key: history.modern, name: 近现代}
+  - key: economics
+    name: 经济/商业
+    children:
+      - {key: economics.finance, name: 金融/货币}
+      - {key: economics.business, name: 企业/商业史}
+      - {key: economics.industry, name: 产业/全球化}
+      - {key: economics.society, name: 社会经济}
+  - key: humanities
+    name: 人文
+    children:
+      - {key: humanities.architecture, name: 艺术/设计/建筑}
+      - {key: humanities.philosophy, name: 哲学/宗教}
+      - {key: humanities.literature, name: 文学}
+      - {key: humanities.food, name: 饮食文化}
+      - {key: humanities.local, name: 地方风土}
+      - {key: humanities.craft, name: 手艺/匠人}
+  - key: nature
+    name: 自然/地理
+    children:
+      - {key: nature.wildlife, name: 野生动物}
+      - {key: nature.ocean, name: 海洋}
+      - {key: nature.geography, name: 地理/风光}

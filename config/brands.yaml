@@ -1,0 +1,48 @@
+# 电视 / 流媒体品牌（scope.md 第 2 节）
+# 按品牌发现：TMDB discover 接口 + 纪录片类型（99）+ 下面的播出方 / 出品公司编号。
+#
+# 字段：
+#   code            编号，对应 scope.md 第 2 节
+#   name            名称
+#   start_year      起始年份
+#   tmdb_networks   TMDB 播出方编号列表（https://www.themoviedb.org/network/<编号>）
+#   tmdb_companies  TMDB 出品公司编号列表（https://www.themoviedb.org/company/<编号>）
+#   default_themes  默认主题（只给单一主题的品牌设，写 themes.yaml 里的 key）
+#   notes           备注（排除规则提示等）
+#   enabled         是否收录
+#   pilot           是否属于迭代 1 试点
+#
+# 编号为 null 的表示还没查；查到后由你核对。试点品牌在阶段 2 查好，其余在迭代 2a 补全。
+
+brands:
+  - code: UK-2
+    name: BBC Natural History Unit / BBC Earth
+    start_year: 2010          # 经典回补到 2006，见 includes.yaml
+    tmdb_networks: []         # 待查：BBC One / BBC Two 等播出方编号
+    tmdb_companies: []        # 待查：BBC Natural History Unit / BBC Studios Natural History Unit
+    default_themes: [nature]
+    notes: ""
+    enabled: true
+    pilot: true
+
+  - code: ST-1
+    name: Netflix
+    start_year: 2015
+    tmdb_networks: []         # 待查：Netflix 播出方编号
+    tmdb_companies: []
+    default_themes: []        # 综合品牌，主题逐条判断
+    notes: 只收纪录片类型
+    enabled: true
+    pilot: true
+
+  - code: UK-1
+    name: BBC（Two / Four / Studios）
+    start_year: 2010
+    tmdb_networks: []
+    tmdb_companies: []
+    default_themes: []
+    notes: Storyville 只收符合主题的
+    enabled: true
+    pilot: false
+
+  # 其余品牌（UK-3 … OT-2）在迭代 2a 按同样格式补全。

@@ -1,0 +1,52 @@
+# 重点栏目（scope.md 第 2.1 节）
+# 按 TMDB 剧集编号直接跟踪，不经过类型筛选，直接收录。
+#
+# 字段：
+#   key          简称
+#   name         栏目名
+#   tmdb_tv_id   TMDB 剧集编号（https://www.themoviedb.org/tv/<编号>），null = 还没查
+#   brand_code   所属品牌（brands.yaml 的 code；不在品牌表里的写 null）
+#   themes       预设主题（themes.yaml 的 key）
+#   per_episode  是否按集记片源状态（长青栏目为 true）
+#   since_year   从哪年起收（默认 2010）
+#   enabled      是否收录
+#   pilot        是否属于迭代 1 试点
+
+series:
+  # —— 迭代 1 试点 ——
+  - {key: nova, name: NOVA, tmdb_tv_id: null, brand_code: US-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+  - {key: horizon, name: Horizon, tmdb_tv_id: null, brand_code: UK-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+  - {key: inside-the-factory, name: Inside the Factory, tmdb_tv_id: null, brand_code: UK-1, themes: [engineering.manufacturing], per_episode: true, since_year: 2010, enabled: true, pilot: true}
+
+  # —— 科学 ——
+  - {key: sky-at-night, name: The Sky at Night, tmdb_tv_id: null, brand_code: UK-1, themes: [science.space], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: how-the-universe-works, name: How the Universe Works, tmdb_tv_id: null, brand_code: US-6, themes: [science.space], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: through-the-wormhole, name: Through the Wormhole, tmdb_tv_id: null, brand_code: US-6, themes: [science.physics], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: nature-of-things, name: The Nature of Things, tmdb_tv_id: null, brand_code: OT-1, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: catalyst, name: Catalyst, tmdb_tv_id: null, brand_code: OT-2, themes: [science], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+
+  # —— 工程技术：制造、超级工程 ——
+  - {key: how-its-made, name: How It's Made, tmdb_tv_id: null, brand_code: null, themes: [engineering.manufacturing], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: megafactories, name: Megafactories / Ultimate Factories, tmdb_tv_id: null, brand_code: US-5, themes: [engineering.manufacturing], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: megastructures, name: Megastructures, tmdb_tv_id: null, brand_code: US-5, themes: [engineering.megaprojects], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: impossible-engineering, name: Impossible Engineering, tmdb_tv_id: null, brand_code: US-6, themes: [engineering.megaprojects], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: modern-marvels, name: Modern Marvels, tmdb_tv_id: null, brand_code: US-7, themes: [engineering], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: engineering-connections, name: Engineering Connections, tmdb_tv_id: null, brand_code: US-5, themes: [engineering], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: extreme-engineering, name: Extreme Engineering, tmdb_tv_id: null, brand_code: US-6, themes: [engineering.megaprojects], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: abandoned-engineering, name: Abandoned Engineering, tmdb_tv_id: null, brand_code: null, themes: [engineering, history.modern], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: super-engineering-cn, name: 超级工程, tmdb_tv_id: null, brand_code: ASIA-1, themes: [engineering.megaprojects], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+
+  # —— 工程技术：交通、航空航天 ——
+  - {key: mighty-ships, name: Mighty Ships, tmdb_tv_id: null, brand_code: null, themes: [engineering.transport], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: mighty-planes, name: Mighty Planes, tmdb_tv_id: null, brand_code: null, themes: [engineering.transport], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+  - {key: great-british-railway-journeys, name: Great British Railway Journeys, tmdb_tv_id: null, brand_code: UK-1, themes: [engineering.transport, humanities.local], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: air-crash-investigation, name: Air Crash Investigation / Mayday, tmdb_tv_id: null, brand_code: US-5, themes: [engineering.accidents, engineering.transport], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: seconds-from-disaster, name: Seconds from Disaster, tmdb_tv_id: null, brand_code: US-5, themes: [engineering.accidents], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+
+  # —— 建筑 ——
+  - {key: worlds-most-extraordinary-homes, name: The World's Most Extraordinary Homes, tmdb_tv_id: null, brand_code: UK-1, themes: [humanities.architecture], per_episode: false, since_year: 2010, enabled: true, pilot: false}
+
+  # —— 历史、自然（PBS 长青栏目）——
+  - {key: american-experience, name: American Experience, tmdb_tv_id: null, brand_code: US-2, themes: [history], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: secrets-of-the-dead, name: Secrets of the Dead, tmdb_tv_id: null, brand_code: US-2, themes: [history], per_episode: true, since_year: 2010, enabled: true, pilot: false}
+  - {key: pbs-nature, name: Nature (PBS), tmdb_tv_id: null, brand_code: US-2, themes: [nature], per_episode: true, since_year: 2010, enabled: true, pilot: false}
