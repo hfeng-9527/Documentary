@@ -7,7 +7,7 @@
 - [`process.md`](process.md) — 开发流程规范（迭代、测试、验收、版本）
 - [`sessions.md`](sessions.md) — 会话规划：分几个会话、每个会话做什么、开场白
 - [`requirements.md`](requirements.md) — 需求说明
-- [`scenarios.md`](scenarios.md) — 使用场景与页面清单（草稿）
+- [`scenarios.md`](scenarios.md) — 使用场景与页面清单
 - [`architecture.md`](architecture.md) — 技术架构
 
 **讨论过程记录**（结论已汇总到 `scope.md` 和 `tracking.md`）：

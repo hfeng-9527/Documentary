@@ -31,14 +31,14 @@ flowchart LR
 
 | 会话 | 内容 | 主要产出 | 需要你在会话里做的事 | 建议在哪里运行 |
 |---|---|---|---|---|
-| **A**（当前） | 阶段 1 收尾 | 阶段 1 文档确认；合并请求合并到 `main` | 回答待确认问题；在 GitHub 上点合并 | 云端 |
+| **A** ✅ | 阶段 1 收尾 | 阶段 1 文档确认；合并请求合并到 `main` | 回答待确认问题；在 GitHub 上点合并 | 云端 |
 | **B** | 阶段 2 数据设计 | `data-model.md`、`source-mapping.md`、配置文件格式、试点 2–3 个品牌的 ID | 确认数据模型；核对试点品牌 ID | 云端 |
 | **C** | 迭代 0 工程骨架 | v0.0：能安装、能运行的空项目 | 在 Windows 上按 README 安装，验收 | 云端写代码，你在电脑上验收 |
 | **D** | 迭代 1 TMDB 小范围 | v0.1：最小闭环 | 提供 TMDB API key；验收；试用几天 | 云端或 Windows（见第 4 节） |
 | **E1** | 迭代 2a TMDB + IMDb | 全部品牌和纪录长片的数据；覆盖报告第一部分 | 核对品牌 ID；确认名作核对清单；看报告 | **Windows 上的 Claude Code**（推荐） |
 | **E2** | 迭代 2b YouTube | 全部频道的数据；覆盖报告第二部分 | 提供 YouTube API key；核对频道 ID；看报告 | **Windows 上的 Claude Code**（推荐） |
 | **E3** | 迭代 2c 豆瓣 + 中文平台 | 中文数据、人工补录页；覆盖报告完成 | 看报告；决定门槛要不要调 | **Windows 上的 Claude Code**（推荐） |
-| **F** | 迭代 3 定期更新 + 报告 + 推送 | v0.3 | 手机装 ntfy；验收 | 云端或 Windows |
+| **F** | 迭代 3 定期更新 + 报告 + 推送 | v0.3 | 验收 | 云端或 Windows |
 | **G** | 迭代 4 Jellyfin 同步 | v0.4 | 提供 Jellyfin API key；验收 | **Windows 上的 Claude Code**（推荐） |
 | **H** | 迭代 5 部署到树莓派 | v0.5，开始日常使用 | 提供树莓派 SSH 访问 | **Windows 上的 Claude Code**（推荐） |
 | **I** | 迭代 6 批量审核 + 大模型标定 | v1.0 | 首轮审核 | 云端或 Windows |
@@ -110,10 +110,33 @@ flowchart LR
 
 | 什么 | 怎么做 | 什么时候需要 |
 |---|---|---|
-| TMDB API key | 在 themoviedb.org 注册账号 → 账号设置 → API → 申请（个人非商业用途），拿到 API key。会话 D 开始时我再一步步带你核对 | 会话 D（迭代 1） |
+| TMDB API key | 见下面的步骤 | 会话 D（迭代 1） |
 | 名作核对清单 | 列 20–30 部你熟悉、确定应该收录的纪录片（英文、中文、系列、长片、YouTube 都要有），会话 E1 里我再补到约 50 部 | 会话 E1（迭代 2a） |
 | 决定会话运行方式 | 第 4 节的 (a) 或 (b) | 会话 E1 之前 |
 | YouTube Data API key | 会话 E2 开始时我带你在 Google Cloud 上申请 | 会话 E2（迭代 2b） |
-| 手机装 ntfy | 应用商店搜 ntfy | 会话 F（迭代 3） |
+| 手机装 ntfy | 应用商店搜 ntfy | 以后需要推送时（目前暂不启用） |
 | Jellyfin API key | Jellyfin 后台 → 控制台 → API 密钥 → 新建 | 会话 G（迭代 4） |
 | 树莓派 SSH 访问 | 会话 H 里说明 | 会话 H（迭代 5） |
+
+### 6.1 申请 TMDB API key
+
+免费，大约 10 分钟。网站界面可能会改版，按钮名称以实际为准。
+
+1. **注册**：打开 https://www.themoviedb.org ，右上角 **Join TMDB**，填用户名、密码、邮箱，去邮箱点验证链接。网站在境外，打不开或很慢时开着代理。
+2. **进入 API 设置**：登录后点右上角头像 → **Settings** → 左侧 **API**（或直接打开 https://www.themoviedb.org/settings/api ）。
+3. **申请**：点 **Create** / **Request an API Key**，类型选 **Developer**，同意条款。
+4. **填表**：
+
+   | 栏目 | 建议填法 |
+   |---|---|
+   | Type of Use | Personal |
+   | Application Name | Documentary Tracker |
+   | Application URL | `http://localhost` 或 GitHub 仓库地址 |
+   | Application Summary | Personal, non-commercial tool to track documentaries for my home media library. |
+   | 个人信息 | 如实填写（必填） |
+
+5. **拿到 key**：提交后一般立即通过，页面显示 **API Key**（32 位字符）和 **API Read Access Token**（很长的一串）。两个都存到安全的地方。
+6. **验证**：浏览器打开 `https://api.themoviedb.org/3/configuration?api_key=你的KEY`，看到以 `{"images":...` 开头的内容就说明可用。
+
+**key 不要发在对话里**：迭代 1 时填到电脑上的 `.env` 文件，程序从那里读取。
+
