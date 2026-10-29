@@ -56,13 +56,11 @@
 
 欧洲 / 亚洲（英文版）
 - [ ] **DW Documentary** — 以英文制作，大量完整纪录片
-- [ ] **NHK WORLD-JAPAN** — 英文版节目
-- [ ] **ARTE.tv Documentary** — 多为英文字幕而非配音，按规则可收的会很少
 - [ ] **CCTV 纪录频道官方频道** — 需过滤主旋律政论片
 
-### 正版重新上传的聚合频道（可选，单独一组）
+### 正版重新上传的聚合频道（按普通 YouTube 频道管理）
 
-这类频道获得授权后重新上传老电视纪录片，量很大，与电视作品重叠度高：
+这类频道获得授权后重新上传老电视纪录片。**决定：当作普通 YouTube 频道管理**，不和电视作品做关联：
 - [ ] **Free Documentary** / **Free Documentary - Nature**
 - [ ] **Timeline – World History Documentaries**
 - [ ] **Real Stories**（⚠ 真实犯罪内容多，需过滤）
@@ -147,5 +145,4 @@
 - Vox、Johnny Harris：时政比例高
 - Simon Whistler 系（Megaprojects、Biographics 等）：产量大，质量参差
 - 老高与小茉等：伪科学/猎奇
-- 电视纪录片重新上传频道：已移到第 2 节的“聚合频道”一组单独决定
 - 中文创作者：B 站不考虑，只有在 YouTube 有官方频道的才可以加进来
