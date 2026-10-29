@@ -106,4 +106,14 @@
 
 ## 8. 验收结果
 
-（迭代结束时填写）
+2026-10-29，你在 Windows 上操作（`D:\AI\Projects\Claude\Documentary\Documentary`）：
+
+| 步骤 | 结果 |
+|---|---|
+| 1–2 装 uv、clone、`uv sync` | 通过。过程中遇到两个网络问题：git clone 被重置（git 不读 PowerShell 的代理变量，要用 `git config --global http.proxy`）；`uv sync` 下载超时（设 `UV_HTTP_TIMEOUT=120` 后重跑）。README 第 0 步已补上这两点 |
+| 3–6 `.env`、version、db upgrade、check-config | 通过，输出与清单一致 |
+| 7 故意改错 default_themes | 通过：报出 `brands.yaml（code=UK-2）字段 default_themes：natur 不在 themes.yaml 里`，改回后通过 |
+| 8 网页 | 首页、样式、htmx 都正常加载（待你确认页面内容） |
+| 9 GitHub Actions | 通过（Ubuntu、Windows 两项都是绿色） |
+
+小问题：浏览器请求 `/favicon.ico` 返回 404（没有网站图标），不影响使用，不处理。

@@ -14,10 +14,20 @@
 ```powershell
 $env:HTTP_PROXY  = "http://127.0.0.1:10808"
 $env:HTTPS_PROXY = "http://127.0.0.1:10808"
+$env:UV_HTTP_TIMEOUT = "120"     # 下载超时从 30 秒放宽到 120 秒
 ```
 
-只对当前窗口有效，关掉窗口就失效。如果 10808 是 socks 端口（http 写法连不上），把两行里的 `http://` 换成 `socks5://`。
-git 也要走代理的话：`git config --global http.proxy http://127.0.0.1:10808`（不需要了用 `git config --global --unset http.proxy` 取消）。
+只对当前窗口有效，关掉窗口就失效，**每开一个新窗口都要重新运行**。如果 10808 是 socks 端口（http 写法连不上），把 `http://` 换成 `socks5://`。
+`uv sync` 下载中途超时，直接再运行一次就行，已经下载完的包不会重新下载。
+
+git **不读**上面的设置，要单独给 git 配代理（只需一次）：
+
+```powershell
+git config --global http.proxy http://127.0.0.1:10808
+git config --global https.proxy http://127.0.0.1:10808
+```
+
+不需要了用 `git config --global --unset http.proxy` 和 `git config --global --unset https.proxy` 取消。
 
 ### 1. 装 uv（只需一次）
 
