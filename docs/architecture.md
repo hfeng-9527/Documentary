@@ -44,10 +44,10 @@ flowchart TB
     subgraph UI["用户界面层（网页）"]
         direction LR
         U1["浏览与搜索<br/>列表 · 详情 · 搜索<br/>迭代 1"]
-        U2["下载决策<br/>待下载 · 最近新出品<br/>迭代 1 / 4"]
+        U2["下载决策<br/>待下载 · 最近新出品<br/>迭代 1 / 3"]
         U3["审核<br/>逐条 · 整组 · 大模型建议<br/>迭代 1 / 6"]
-        U4["片源管理<br/>手动标记 · 未匹配处理<br/>迭代 1 / 3"]
-        U5["运维查看<br/>运行记录 · 人工补录<br/>迭代 2 / 4"]
+        U4["片源管理<br/>手动标记 · 未匹配处理<br/>迭代 1 / 4"]
+        U5["运维查看<br/>运行记录 · 人工补录<br/>迭代 2 / 3"]
     end
 
     subgraph BIZ["业务规则层"]
@@ -55,14 +55,14 @@ flowchart TB
         B1["初筛规则<br/>时长 · 语种 · 主题 · 排除<br/>迭代 1 起逐步加"]
         B2["评分门槛<br/>规则 A / B / C<br/>迭代 2"]
         B3["状态流转<br/>跟踪状态 · 片源状态<br/>迭代 1"]
-        B4["报告与推送<br/>运行报告 · ntfy<br/>迭代 2 / 4"]
+        B4["报告与推送<br/>运行报告 · ntfy<br/>迭代 2 / 3"]
     end
 
     subgraph TASK["任务层（命令行，定时运行）"]
         direction LR
-        T1["双周发现<br/>doc discover<br/>迭代 1 手动 / 4 定时"]
-        T2["月度刷新<br/>doc refresh<br/>迭代 4"]
-        T3["片源同步<br/>doc sync-jellyfin<br/>迭代 3"]
+        T1["双周发现<br/>doc discover<br/>迭代 1 手动 / 3 定时"]
+        T2["月度刷新<br/>doc refresh<br/>迭代 3"]
+        T3["片源同步<br/>doc sync-jellyfin<br/>迭代 4"]
         T4["全量回溯<br/>doc backfill<br/>迭代 1 小范围 / 2 全量"]
         T5["备份<br/>doc backup<br/>迭代 5"]
     end
@@ -70,7 +70,7 @@ flowchart TB
     subgraph SRC["数据来源层"]
         direction LR
         S1["TMDB<br/>迭代 1 / 2a"]
-        S2["Jellyfin<br/>迭代 3"]
+        S2["Jellyfin<br/>迭代 4"]
         S3["YouTube<br/>迭代 2b"]
         S4["IMDb 数据包<br/>迭代 2a"]
         S5["豆瓣 · 中文平台<br/>迭代 2c"]
