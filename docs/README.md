@@ -5,7 +5,8 @@
 - [`tracking.md`](tracking.md) — 双周更新跟踪方案
 - [`plan.md`](plan.md) — 整体计划与交付物
 - [`requirements.md`](requirements.md) — 需求说明
-- [`architecture.md`](architecture.md) — 技术架构（草稿）
+- [`scenarios.md`](scenarios.md) — 使用场景与页面清单（草稿）
+- [`architecture.md`](architecture.md) — 技术架构
 
 **讨论过程记录**（结论已汇总到 `scope.md` 和 `tracking.md`）：
 - [`01-scope-candidates.md`](01-scope-candidates.md) — 最初的大范围候选清单
