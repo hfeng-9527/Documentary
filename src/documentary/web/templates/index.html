@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>配置检查
+    {% if check.ok %}<span class="badge ok">通过</span>{% else %}<span class="badge bad">有错误</span>{% endif %}
+  </h2>
+  <table>
+    <thead><tr><th>文件</th><th>条目数</th><th>还没查编号</th></tr></thead>
+    <tbody>
+    {% for name, st in check.stats.items() %}
+      <tr><td>{{ name }}</td><td>{{ st.count }}</td><td>{{ st.missing_ids if st.missing_ids is not none else "—" }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if check.errors %}
+  <h3>错误</h3>
+  <ul class="errors">{% for e in check.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if check.warnings %}
+  <details>
+    <summary>提醒（{{ check.warnings|length }} 条，现在不用处理）</summary>
+    <ul class="warnings">{% for w in check.warnings %}<li>{{ w }}</li>{% endfor %}</ul>
+  </details>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>数据库
+    {% if db.up_to_date %}<span class="badge ok">正常</span>
+    {% elif not db.exists %}<span class="badge bad">未初始化</span>
+    {% else %}<span class="badge bad">需要升级</span>{% endif %}
+  </h2>
+  <p class="muted">{{ settings.db_path }}</p>
+  {% if not db.up_to_date %}<p>请运行 <code>uv run doc db upgrade</code></p>{% endif %}
+  <p class="muted">表结构版本：{{ db.current or "—" }}（最新 {{ db.head }}）</p>
+</section>
+
+<section class="card">
+  <h2>最近运行</h2>
+  {% if runs %}
+  <table>
+    <thead><tr><th>#</th><th>任务</th><th>触发</th><th>状态</th><th>开始</th><th>结束</th></tr></thead>
+    <tbody>
+    {% for r in runs %}
+      <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.task }}</td>
+        <td>{{ TRIGGER_ZH.get(r.trigger, r.trigger) }}</td>
+        <td><span class="status {{ r.status }}">{{ STATUS_ZH.get(r.status, r.status) }}</span></td>
+        <td>{{ r.started_at|localtime }}</td>
+        <td>{{ r.finished_at|localtime }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">还没有运行记录。</p>
+  {% endif %}
+</section>
+{% endblock %}

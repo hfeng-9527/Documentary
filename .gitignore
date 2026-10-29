@@ -1,0 +1,13 @@
+# 数据目录（数据库、备份、日志）不进仓库
+data/
+# 密钥和本机配置
+.env
+
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/

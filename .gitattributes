@@ -1,0 +1,6 @@
+# 统一 LF 换行（requirements.md 第 4.4 节），Windows 上检出也不转成 CRLF
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
+*.db binary
