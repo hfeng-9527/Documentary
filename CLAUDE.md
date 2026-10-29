@@ -21,7 +21,7 @@
 
 - 阶段 0（范围定义）：完成
 - 阶段 1（需求与技术方案）：**完成**，全部文档已确认（会话 A）
-- 阶段 2（数据设计）：**进行中**（在会话 A 里继续）。迭代 1 试点已定：品牌 BBC Earth、Netflix；重点栏目 NOVA、Horizon、Inside the Factory。新增 `scope.md` 第 2.1 节“重点栏目清单”（已确认）。收录总原则：知识类、科普类都收，偏娱乐性的不收。`data-model.md` 已确认；`source-mapping.md` 草稿和 `config/*.yaml` 格式已写；**剩下：试点 TMDB 编号**（云端环境访问不了 themoviedb.org，需用户放开网络或自己查）
+- 阶段 2（数据设计）：**进行中**（在会话 A 里继续）。迭代 1 试点已定：品牌 BBC Earth、Netflix；重点栏目 NOVA、Horizon、Inside the Factory。新增 `scope.md` 第 2.1 节“重点栏目清单”（已确认）。收录总原则：知识类、科普类都收，偏娱乐性的不收。`data-model.md` 已确认；`source-mapping.md` 草稿和 `config/*.yaml` 格式已写；试点 TMDB 编号已查到并经用户确认（`config/brands.yaml`、`series.yaml`）。云端网络已放开 themoviedb.org。**剩下：用户确认 `source-mapping.md` 第 8 节的标题匹配规则 → 阶段 2 完成**
 - 阶段 2（数据设计）、阶段 3（迭代 0–6 分步开发）尚未开始。迭代顺序：0 骨架 → 1 TMDB 小范围闭环 → **2 数据获取扩大到全部预定范围**（2a TMDB+IMDb / 2b YouTube / 2c 豆瓣+中文平台）→ 3 定期更新+报告 → 4 Jellyfin → 5 树莓派 → 6 批量审核+大模型 v1.0
 
 ## 关键约束（细节见各文档）
