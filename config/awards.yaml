@@ -1,0 +1,8 @@
+# 奖项名单（scope.md 第 3 节规则 C）：提名或获奖直接收录，不看评分。每年手工补充。
+#
+# 字段：award（oscar 奥斯卡最佳纪录长片 / golden_horse 金马奖最佳纪录片）、year（届次年份）、
+#       result（nominee 提名 / winner 获奖）、title、tmdb_movie_id（null = 还没查）
+
+awards: []
+# 示例：
+#  - {award: oscar, year: 2019, result: winner, title: Free Solo, tmdb_movie_id: null}

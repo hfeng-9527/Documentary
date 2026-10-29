@@ -1,0 +1,18 @@
+# 手动收录：2010 年前的高清经典（scope.md 第 5 节）等，需要指定收录的作品。入库时逐部核实高清母版。
+#
+# 字段：title、kind（series / film）、year、tmdb_id（null = 还没查）、brand_code、notes
+
+includes:
+  - {title: Planet Earth, kind: series, year: 2006, tmdb_id: null, brand_code: UK-2, notes: ""}
+  - {title: Galápagos, kind: series, year: 2006, tmdb_id: null, brand_code: UK-2, notes: ""}
+  - {title: "Earth: The Power of the Planet", kind: series, year: 2007, tmdb_id: null, brand_code: UK-1, notes: ""}
+  - {title: The Story of India, kind: series, year: 2007, tmdb_id: null, brand_code: UK-1, notes: ""}
+  - {title: The War, kind: series, year: 2007, tmdb_id: null, brand_code: US-3, notes: Ken Burns}
+  - {title: Earth, kind: film, year: 2007, tmdb_id: null, brand_code: UK-2, notes: 院线}
+  - {title: Wild China（美丽中国）, kind: series, year: 2008, tmdb_id: null, brand_code: UK-2, notes: ""}
+  - {title: The Ascent of Money, kind: series, year: 2008, tmdb_id: null, brand_code: null, notes: ""}
+  - {title: Life, kind: series, year: 2009, tmdb_id: null, brand_code: UK-2, notes: ""}
+  - {title: "Nature's Great Events", kind: series, year: 2009, tmdb_id: null, brand_code: UK-2, notes: ""}
+  - {title: The National Parks, kind: series, year: 2009, tmdb_id: null, brand_code: US-3, notes: Ken Burns}
+  - {title: Home, kind: film, year: 2009, tmdb_id: null, brand_code: null, notes: 院线}
+  - {title: 故宫, kind: series, year: 2005, tmdb_id: null, brand_code: ASIA-1, notes: 待核实是否高清母版}

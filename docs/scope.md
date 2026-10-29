@@ -13,7 +13,8 @@
 | 语种 | 英文、中文原产；非中英原产的作品**必须有官方英文配音版**（只有字幕不算） |
 | 主题 | 科学、工程技术、历史、经济/商业、人文、自然/地理 |
 | 形式 | 电视/流媒体纪录片系列、纪录长片（院线 + 流媒体独立长片，按评分收录）、YouTube 视频 |
-| 不收 | 时政/调查新闻、纪实剧/历史重演、伪科学、真人秀、真实犯罪、体育、音乐/明星传记、央视主旋律政论片 |
+| 总原则 | **知识类、科普类都收；偏娱乐性的不收** |
+| 不收 | 时政/调查新闻、纪实剧/历史重演（以演员表演为主体）、伪科学、真人秀、真实犯罪、体育、音乐/明星传记、央视主旋律政论片 |
 | 不收的平台 | B 站 |
 | 去重 | 第一步不做。以后合并时的原则：**各自有独立评分的条目不合并**（见第 7 节） |
 
@@ -56,6 +57,87 @@
 | [x] | OT-2 | ABC Australia（*Catalyst*） | 2010 | *Four Corners* 属时政，不收 |
 
 已移出：FRONTLINE、VICE、Al Jazeera、NHK、ARTE。
+
+### 2.1 重点栏目（直接跟踪）
+
+按品牌发现依赖 TMDB 把节目标成“纪录片”类型、播出方 ID 也要配对。工程、交通、建筑这类节目常常不满足这两个条件，容易漏：有的在 TMDB 上被标成真人秀或其他类型，有的播出方不在品牌表里（如加拿大 Discovery、英国 Yesterday）。它们还可能被“真人秀”排除规则误伤。
+
+所以另设一张**重点栏目清单**：按 TMDB 编号直接跟踪，不经过类型筛选，直接收录，并有预设主题。主要放**长青栏目和多季系列**；单部的系列和长片照常靠品牌发现和主题规则。长青栏目按集跟踪；2010 年前开播的，只收 2010 年起播出的季和集（与第 1 节一致）。
+
+- 播出方、年份、TMDB 编号在迭代 1（试点栏目）和迭代 2a（其余栏目）逐一核实，核实不了的标出来。
+- 以后加栏目只需要在 `config/series.yaml` 里加一行，并同步本表。
+
+**科学**
+
+| 收录 | 栏目 | 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *Horizon* | BBC（UK-1） | 科学 |
+| [x] | *NOVA* | PBS（US-1） | 科学 |
+| [x] | *The Sky at Night* | BBC Four（UK-1） | 科学 / 宇宙天文 |
+| [x] | *How the Universe Works* | Science Channel（US-6） | 科学 / 宇宙天文 |
+| [x] | *Through the Wormhole* | Science Channel（US-6） | 科学 / 物理 |
+| [x] | *The Nature of Things* | CBC（OT-1） | 科学 |
+| [x] | *Catalyst* | ABC Australia（OT-2） | 科学 |
+
+**工程技术：制造、超级工程**
+
+| 收录 | 栏目 | 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *Inside the Factory* | BBC Two（UK-1） | 制造业 |
+| [x] | *How It's Made* | Discovery Canada / Science Channel | 制造业 |
+| [x] | *Megafactories* / *Ultimate Factories* | National Geographic（US-5） | 制造业 |
+| [x] | *Megastructures* | National Geographic（US-5） | 超级工程/建筑 |
+| [x] | *Impossible Engineering* | Science Channel（US-6） | 超级工程/建筑 |
+| [x] | *Modern Marvels* | History（US-7） | 工程技术 |
+| [x] | *Engineering Connections* | National Geographic（US-5） | 工程技术 |
+| [x] | *Extreme Engineering* | Discovery（US-6） | 超级工程/建筑 |
+| [x] | *Abandoned Engineering* | Yesterday（英国） | 工程技术 / 近现代 |
+| [x] | 《超级工程》 | CCTV（ASIA-1） | 超级工程/建筑 |
+
+**工程技术：交通、航空航天**
+
+| 收录 | 栏目 | 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *Mighty Ships* | Discovery Canada | 交通/航空航天 |
+| [x] | *Mighty Planes* | Discovery Canada / Science Channel | 交通/航空航天 |
+| [x] | *Great British Railway Journeys* | BBC Two（UK-1） | 交通 / 地方风土 |
+| [x] | *Air Crash Investigation*（美国名 *Mayday*） | National Geographic（US-5） | 工程事故 / 交通/航空航天 |
+| [x] | *Seconds from Disaster* | National Geographic（US-5） | 工程事故 |
+
+**建筑**
+
+| 收录 | 栏目 | 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *The World's Most Extraordinary Homes* | BBC Two（UK-1） | 艺术/设计/建筑 |
+
+**历史、自然**（`scope.md` 第 2 节里已提到的 PBS 长青栏目，统一放进清单按集跟踪）
+
+| 收录 | 栏目 | 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *American Experience* | PBS（US-2） | 历史 |
+| [x] | *Secrets of the Dead* | PBS（US-2） | 历史 |
+| [x] | *Nature* | PBS（US-2） | 自然/地理 |
+
+**不收**：《大国重器》（偏主旋律）、*Food Unwrapped*（偏消费者节目）、*Grand Designs*（偏家居装修真人秀）。
+
+**关于情景重现**：第 1 节“不收纪实剧/历史重演”指的是以演员表演为主体的作品（如 *Mars*）。调查类节目（如 *Air Crash Investigation*）的主体是采访、调查报告和技术分析，中间穿插重现镜头，**属于知识类，收**。
+
+---|---|---|---|
+| [x] | *Horizon* | BBC（UK-1） | 科学 |
+| [x] | *NOVA* | PBS（US-1） | 科学 |
+| [x] | *Inside the Factory* | BBC Two（UK-1） | 工程技术 / 制造业 |
+| [x] | *How It's Made* | Discovery Canada / Science Channel | 工程技术 / 制造业 |
+| [x] | *Megafactories* / *Ultimate Factories* | National Geographic（US-5） | 工程技术 / 制造业 |
+| [x] | *Megastructures* | National Geographic（US-5） | 工程技术 / 超级工程 |
+| [x] | *Impossible Engineering* | Science Channel（US-6） | 工程技术 |
+| [x] | *Modern Marvels* | History（US-7） | 工程技术 |
+| [x] | *Mighty Ships* | Discovery Canada | 工程技术 / 交通 |
+| [x] | 《超级工程》 | CCTV（ASIA-1） | 工程技术 / 超级工程 |
+| [ ] | 《大国重器》 | CCTV（ASIA-1） | 工程技术 / 制造业（需判断是否偏主旋律） |
+| [ ] | *Food Unwrapped* | Channel 4（UK-3） | 偏消费者节目，默认不收 |
+
+- 以后加栏目只需要在清单里加一行。
+- 迭代 1、2 里会核对这些栏目在 TMDB 上的编号和类型标注，确认按品牌发现会不会漏掉它们。
 
 ---
 

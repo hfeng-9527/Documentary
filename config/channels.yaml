@@ -1,0 +1,15 @@
+# YouTube 频道（scope.md 第 4 节）。迭代 2b 按这个格式补全全部频道。
+#
+# 字段：
+#   key                 简称
+#   name                频道名
+#   youtube_channel_id  频道编号（UC 开头），null = 还没查
+#   channel_type        official 官方 / aggregator 聚合 / independent 独立
+#   min_duration_min    时长门槛（分钟）：官方、聚合 20；独立 5
+#   default_themes      默认主题（单一主题频道才设）
+#   filters             额外过滤提示，如 true_crime（要过滤真实犯罪）、politics（要过滤时政）
+#   enabled             是否收录
+
+channels:
+  - {key: veritasium, name: Veritasium, youtube_channel_id: null, channel_type: independent, min_duration_min: 5, default_themes: [science], filters: [], enabled: true}
+  - {key: real-stories, name: Real Stories, youtube_channel_id: null, channel_type: aggregator, min_duration_min: 20, default_themes: [], filters: [true_crime], enabled: true}

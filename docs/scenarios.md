@@ -245,16 +245,16 @@ flowchart TD
 
 ### S8 Jellyfin 匹配不上
 
-1. 中文纪录片、YouTube 视频在 Jellyfin 里常常没有 TMDB / IMDb 编号，按标题也可能匹配不上。
-2. **Jellyfin 未匹配**页列出这些 Jellyfin 条目，给出候选作品，手动点选对应关系；对应关系记住，以后同步自动用。
+1. 同步只按 TMDB / IMDb 编号对上（`source-mapping.md` 第 7 节）。编号不在本应用里的条目（不在收录范围的片）直接忽略。
+2. 没有任何编号的 Jellyfin 条目，列在 **Jellyfin 未匹配**页，你手动选对应的作品或忽略；对应关系记住，以后同步自动用。你的 Jellyfin 库都有编号，预计很少用到。
 
 ```mermaid
 flowchart TD
-    A["每日 doc sync-jellyfin<br/>只读 Jellyfin API"] --> B{"有 TMDB / IMDb 编号<br/>且能对上？"}
-    B -->|是| E["改为已入库<br/>精确到季、集"]
-    B -->|否| C{"按标题能对上？"}
-    C -->|是| E
-    C -->|否| D["进入 Jellyfin 未匹配页"]
+    A["每日 doc sync-jellyfin<br/>只读 Jellyfin API"] --> B{"条目有 TMDB / IMDb 编号？"}
+    B -->|有| C{"本应用里有这部作品？"}
+    C -->|有| E["改为已入库<br/>精确到季、集"]
+    C -->|没有| Z["不在收录范围，忽略"]
+    B -->|没有| D["进入 Jellyfin 未匹配页"]
     D --> F["你手动选对应作品，或忽略"]
     F --> G["记住对应关系"]
     G --> E
