@@ -1,4 +1,6 @@
-# YouTube / B 站：跟踪方式、去重、频道推荐
+# YouTube：跟踪方式与频道清单
+
+> 范围：**只跟踪 YouTube，不考虑 B 站**。包括两类频道：独立创作者，以及电视台/流媒体的官方频道。
 
 ## 1. YouTube 怎么跟踪
 
@@ -17,46 +19,56 @@
 - **清晰度**：`contentDetails.definition` 只区分 `hd`（≥720p）和 `sd`，不区分 1080p。对 2014 年后的频道基本都是 `hd`，够用。
 - **可拿到的字段**：标题、简介、发布时间、时长、标签、分类、默认语言、缩略图、播放量/点赞（统计字段可选）。
 
-## 2. B 站怎么跟踪
+## 2. 电视台 / 流媒体官方频道（跟踪）
 
-B 站**没有面向公开数据的官方开放 API**，只能用网页端接口（非官方，可能变动，有风控）。
+这类频道上传的内容混杂：完整剧集、片段、预告、幕后花絮都有。处理规则：
 
-| 用途 | 接口（网页端） | 说明 |
-|---|---|---|
-| UP 主投稿列表 | `x/space/wbi/arc/search?mid=…` | 需要 WBI 签名（`w_rid`/`wts`），容易触发风控（-352 / 412） |
-| 视频详情 | `x/web-interface/view?bvid=…` | 标题、简介、时长、发布时间、分 P、**`copyright`（1 = 自制，2 = 转载）** |
-| 合集/系列 | `x/polymer/web-space/seasons_archives_list` | 对应 UP 主的“合集” |
-| **官方纪录片区（PGC）** | `pgc/season/index/result?season_type=3`、`pgc/view/web/season?season_id=…` | B 站正版纪录片（自制的《人生一串》，以及引进的 BBC 等）——这是另一条有价值的数据源 |
+- **按内容类型打标签**：完整剧集/完整纪录片、片段、预告、其他。
+  - 判断依据：时长（≥ 40 分钟基本是完整剧集，20–40 分钟需要看标题，< 20 分钟基本是片段）；标题关键词（如 “Full Episode”、“Full Documentary”）；所在播放列表。
+- **默认只入库 ≥ 20 分钟的视频**，片段和预告不入库（如需要可以以后放开）。
+- **与电视作品的关系**：电视作品暂不去重。视频表预留一个可空的“对应作品”字段，以后再关联（例如 NOVA 频道上传的某集对应 NOVA 的某一期）。
+- **语种规则同样适用**：非英文的官方频道只收英文配音的内容。
 
-- **实现建议**：
-  - 全量回溯：用开源库 `bilibili-api-python`（已封装 WBI 签名），低频请求（每 2–3 秒一次）。
-  - 日常增量：自建 **RSSHub**（`/bilibili/user/video/:uid`），定时拉。
-- **风险**：接口非官方，需要接受偶发失效、需要维护；仅做个人/低频使用，不做大规模抓取。
+### 官方频道清单（待勾选）
 
-## 3. YouTube ↔ B 站重复：情况与去重方案
+英国
+- [ ] **BBC Earth** — BBC 自然历史部（BBC Natural History Unit）和 BBC 科学内容的官方频道，以片段为主，也有完整长片
 
-### 重复主要有三种
+美国 PBS
+- [ ] **NOVA PBS Official** — 近年上传了不少完整剧集
+- [ ] **American Experience | PBS** — 历史
+- [ ] **Nature on PBS** — 自然
+- [ ] **PBS Eons** — 古生物/演化（网络原创）
+- [ ] **PBS Terra** — 地球科学/自然（网络原创）
+- （PBS Space Time、Deep Look 已列在第 3 节）
 
-| 类型 | 例子 | 怎么识别 |
-|---|---|---|
-| **A. 同一创作者双平台发布** | 很多中文 UP 主同时发 B 站和 YouTube | 先在**频道级**人工绑定（同一创作者），再按“时长 ±2 秒 + 发布日期 ±3 天”匹配视频 |
-| **B. 官方或授权的中文字幕版** | 部分英文频道在 B 站有官方/授权账号（如 3Blue1Brown） | 同上：频道级绑定 + 时长匹配；B 站发布时间通常晚于 YouTube |
-| **C. 未授权搬运** | B 站大量 `copyright = 2` 的转载 | **不跟踪**。B 站简介里常带原视频链接，可正则提取 YouTube 视频 ID 作关联（可选） |
+美国有线电视
+- [ ] **National Geographic**
+- [ ] **Nat Geo Animals**
+- [ ] **Discovery**
+- [ ] **Science Channel**
+- [ ] **HISTORY** — 需过滤 *Ancient Aliens* 等伪科学和真人秀
+- [ ] **Smithsonian Channel**
 
-### 建议的规则：从源头减少去重
+流媒体
+- [ ] **Our Planet**（Netflix 官方，已免费上传全集）
+- （Netflix、Apple TV+ 主频道以预告为主，不建议跟踪）
 
-1. **每个创作者只认一个“首发平台”**：英文创作者以 YouTube 为准，中文创作者以 B 站为准（大多数在 B 站首发）。
-2. **只跟踪官方账号，不跟踪搬运**（B 站过滤 `copyright = 2`）。
-3. 对 A、B 两类，另一平台的同一视频不作为新条目，而是挂在原条目下，作为“另一观看地址”。
-4. 数据结构：`创作者 → 平台账号（多个）→ 视频`；视频之间用“同一内容”关系相连。
+欧洲 / 亚洲（英文版）
+- [ ] **DW Documentary** — 以英文制作，大量完整纪录片
+- [ ] **NHK WORLD-JAPAN** — 英文版节目
+- [ ] **ARTE.tv Documentary** — 多为英文字幕而非配音，按规则可收的会很少
+- [ ] **CCTV 纪录频道官方频道** — 需过滤主旋律政论片
 
-这样去重只发生在**已知的同一创作者内部**，规则简单，准确率高，不需要做跨全站的模糊匹配。
+### 正版重新上传的聚合频道（可选，单独一组）
 
-### 另一种重叠：电视台官方 YouTube 频道
+这类频道获得授权后重新上传老电视纪录片，量很大，与电视作品重叠度高：
+- [ ] **Free Documentary** / **Free Documentary - Nature**
+- [ ] **Timeline – World History Documentaries**
+- [ ] **Real Stories**（⚠ 真实犯罪内容多，需过滤）
+- [ ] **Spark**（科学/工程）
 
-BBC Earth、NOVA PBS、National Geographic、DW Documentary 的官方频道，以及 Timeline、Real Stories、Free Documentary 这类**正版重新上传电视纪录片的频道**，内容和电视/流媒体作品重叠。电视作品暂不去重，所以**这类频道暂不作为 YouTube 创作者跟踪**，以后可以作为电视作品的“观看渠道”来用。
-
-## 4. YouTube 推荐频道（英文，待勾选）
+## 3. 独立创作者频道（英文，待勾选）
 
 > 标准：纪录片或深度长视频风格、制作精良、持续更新（或有大量存量），属于科学、工程、历史、经济、人文、自然地理。
 > ⚠ 标记的频道含有时政/观点内容，需要逐条过滤或整体排除。
@@ -65,7 +77,7 @@ BBC Earth、NOVA PBS、National Geographic、DW Documentary 的官方频道，�
 - [ ] **Kurzgesagt – In a Nutshell** — 动画科普，宇宙/生物/社会
 - [ ] **Veritasium** — 物理与科学，实验 + 纪录片风格
 - [ ] **PBS Space Time** — 天体物理/理论物理，偏硬核
-- [ ] **3Blue1Brown** — 数学可视化（B 站有官方中文账号）
+- [ ] **3Blue1Brown** — 数学可视化
 - [ ] **Numberphile** — 数学
 - [ ] **minutephysics** — 物理短讲
 - [ ] **SmarterEveryDay** — 工程与物理实验
@@ -135,14 +147,5 @@ BBC Earth、NOVA PBS、National Geographic、DW Documentary 的官方频道，�
 - Vox、Johnny Harris：时政比例高
 - Simon Whistler 系（Megaprojects、Biographics 等）：产量大，质量参差
 - 老高与小茉等：伪科学/猎奇
-- Timeline、Real Stories、Free Documentary 等电视纪录片重新上传频道：见第 3 节，暂不作为创作者跟踪
-
-## 5. B 站候选 UP 主（中文，初步，待你补充和确认）
-
-- 科学：二次元的中科院物理所、李永乐老师、毕导THU、芳斯塔芙（古生物/生物）、无穷小亮的科普日常（自然/生物）
-- 工程/科技：回形针PaperClip
-- 经济/商业：小Lin说、所长林超、柴知道
-- 历史：史图馆
-- 地理：星球研究所、地球知识局、中国国家地理
-- 人文/心理：汤质看本质、意外艺术
-- 另外：**B 站官方纪录片区（PGC）**单独作为一个数据源（自制和引进的正版纪录片）
+- 电视纪录片重新上传频道：已移到第 2 节的“聚合频道”一组单独决定
+- 中文创作者：B 站不考虑，只有在 YouTube 有官方频道的才可以加进来

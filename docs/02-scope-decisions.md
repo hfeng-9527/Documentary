@@ -1,4 +1,4 @@
-# 范围决策记录（第一版）
+# 范围决策记录（第二版）
 
 > 基于 `01-scope-candidates.md` 第 0 节的问题，记录已确认的决定。
 
@@ -10,17 +10,25 @@
 | Q4 | 时政/调查新闻 | **不收** |
 | Q5 | 纪实剧/历史重演 | **不收** |
 | Q6 | 院线纪录长片 | **收录** |
-| Q7 | YouTube / B 站 | **收录**，方案见 `03-web-video-tracking.md` |
-| Q8 | 语种 | **只收英文、中文**原产 |
+| Q7 | YouTube / B 站 | **只收 YouTube，不考虑 B 站**；电视台官方 YouTube 频道也跟踪。方案见 `03-web-video-tracking.md` |
+| Q8 | 语种 | 收英文、中文原产；**非中英原产的作品，有官方英文配音版才收**（只有英文字幕不算） |
 | Q9 | 排除 | 伪科学、真人秀、真实犯罪、体育、明星传记、央视主旋律政论片 **一律不收** |
 | — | 电视/流媒体作品去重 | **暂不做**，第一步只建基础数据 |
-| — | YouTube ↔ B 站去重 | **需要做**，见 `03-web-video-tracking.md` |
+| — | YouTube ↔ B 站去重 | 不考虑 B 站，**不再需要** |
+| — | 电视台官方 YouTube 上传 ↔ 电视作品 | 暂不去重，只预留关联字段 |
 
 ## 由此带来的范围调整
 
 - 移出：US-4 FRONTLINE、US-10 中 VICE 一类、OT-3 Al Jazeera、OT-2 *Four Corners*；History 的 *Washington* / *Grant* 等人物纪实剧；NatGeo *Mars*；Netflix *Roman Empire*；US-9 CNN 年代史中偏时政部分需逐部判断。
-- 移出（语种）：EU-1 ARTE、EU-2 ZDF Terra X、EU-3 *Apocalypse*、EU-6 ORF、ASIA-4 NHK、ASIA-5 韩国三台——**原产非中英**。
-  - 注意：其中不少有官方英文版（ARTE、DW、NHK World 的英文节目，*Apocalypse* 有英文配音版），是否按“有官方英文版即可”放宽，待定。
+- 有条件保留（非中英原产）：EU-1 ARTE、EU-2 ZDF Terra X、EU-3 *Apocalypse*、EU-6 ORF、ASIA-4 NHK、ASIA-5 韩国三台。
+  - 品牌保留在候选池里，但**按作品逐部判断**：有官方英文配音版才收，只有英文字幕的不收。
+  - 预期情况（待核实）：
+    - NHK：NHK World-Japan 的英文版节目是英文旁白，大部分可收；只在日本国内播出的 NHK 节目多数没有英文版。
+    - *Apocalypse*：主要几部有英文旁白版（如 *Apocalypse: The Second World War*），可收。
+    - DW Documentary：本身就以英文制作播出，可收。
+    - ARTE：多数只有字幕，可收的会很少。
+    - ZDF Terra X、ORF *Universum*、韩国三台：部分作品通过国际发行做了英文版，需要逐部查。
+- 移出：ASIA-3 中的 B 站自制纪录片（B 站整体不考虑；如果作品在其他平台有正版发行，仍可按电视/流媒体作品收录）。
 - 移出（类型）：Netflix 的真实犯罪、体育类；HBO 的真实犯罪类。
 
 ## 2010 年前高清经典：收录标准
@@ -41,3 +49,8 @@
 - 金马奖最佳纪录片（中文作品的主要来源）
 - Sundance、IDFA 等电影节（可选，量大，后续再定）
 - 叠加主题过滤：只留科学、工程、历史、经济、人文、自然地理
+
+## 数据字段上的影响
+
+- 每部作品需要记录：原产语种、是否有官方英文配音、是否有中文版本。
+- 非中英原产的作品，以“有官方英文配音”作为入库条件。
