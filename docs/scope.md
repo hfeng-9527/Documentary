@@ -13,7 +13,8 @@
 | 语种 | 英文、中文原产；非中英原产的作品**必须有官方英文配音版**（只有字幕不算） |
 | 主题 | 科学、工程技术、历史、经济/商业、人文、自然/地理 |
 | 形式 | 电视/流媒体纪录片系列、纪录长片（院线 + 流媒体独立长片，按评分收录）、YouTube 视频 |
-| 不收 | 时政/调查新闻、纪实剧/历史重演、伪科学、真人秀、真实犯罪、体育、音乐/明星传记、央视主旋律政论片 |
+| 总原则 | **知识类、科普类都收；偏娱乐性的不收** |
+| 不收 | 时政/调查新闻、纪实剧/历史重演（以演员表演为主体）、伪科学、真人秀、真实犯罪、体育、音乐/明星传记、央视主旋律政论片 |
 | 不收的平台 | B 站 |
 | 去重 | 第一步不做。以后合并时的原则：**各自有独立评分的条目不合并**（见第 7 节） |
 
@@ -100,15 +101,14 @@
 | [x] | *Mighty Ships* | Discovery Canada | 交通/航空航天 |
 | [x] | *Mighty Planes* | Discovery Canada / Science Channel | 交通/航空航天 |
 | [x] | *Great British Railway Journeys* | BBC Two（UK-1） | 交通 / 地方风土 |
-| [ ] | *Air Crash Investigation*（美国名 *Mayday*） | National Geographic（US-5） | 工程事故 / 航空。**待定**：大量使用情景重现，见下 |
-| [ ] | *Seconds from Disaster* | National Geographic（US-5） | 工程事故。**待定**：同上 |
+| [x] | *Air Crash Investigation*（美国名 *Mayday*） | National Geographic（US-5） | 工程事故 / 交通/航空航天 |
+| [x] | *Seconds from Disaster* | National Geographic（US-5） | 工程事故 |
 
 **建筑**
 
 | 收录 | 栏目 | 播出方 | 主题 |
 |---|---|---|---|
 | [x] | *The World's Most Extraordinary Homes* | BBC Two（UK-1） | 艺术/设计/建筑 |
-| [ ] | *Grand Designs* | Channel 4（UK-3） | 艺术/设计/建筑。**待定**：偏家居装修真人秀 |
 
 **历史、自然**（`scope.md` 第 2 节里已提到的 PBS 长青栏目，统一放进清单按集跟踪）
 
@@ -118,9 +118,9 @@
 | [x] | *Secrets of the Dead* | PBS（US-2） | 历史 |
 | [x] | *Nature* | PBS（US-2） | 自然/地理 |
 
-**不收**：《大国重器》（偏主旋律）、*Food Unwrapped*（偏消费者节目）。
+**不收**：《大国重器》（偏主旋律）、*Food Unwrapped*（偏消费者节目）、*Grand Designs*（偏家居装修真人秀）。
 
-**关于情景重现**：第 1 节“不收纪实剧/历史重演”指的是以演员表演为主体的作品（如 *Mars*）。*Air Crash Investigation* 这类节目的主体是事故调查（采访、调查报告、技术分析），中间穿插重现镜头。是否收录待你决定。
+**关于情景重现**：第 1 节“不收纪实剧/历史重演”指的是以演员表演为主体的作品（如 *Mars*）。调查类节目（如 *Air Crash Investigation*）的主体是采访、调查报告和技术分析，中间穿插重现镜头，**属于知识类，收**。
 
 ---|---|---|---|
 | [x] | *Horizon* | BBC（UK-1） | 科学 |
