@@ -11,6 +11,14 @@
   <header>
     <a class="brand" href="/">纪录片跟踪</a>
     <span class="version">v{{ version }}</span>
+    <nav>
+      <a href="/review">审核</a>
+      <a href="/titles">作品</a>
+      <a href="/to-download">待下载</a>
+    </nav>
+    <form class="search" action="/search" method="get">
+      <input type="search" name="q" placeholder="中文或英文标题" value="{{ q|default('') }}" aria-label="搜索">
+    </form>
   </header>
   <main>
     {% block content %}{% endblock %}

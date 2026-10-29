@@ -9,10 +9,21 @@ from documentary.core.models import Base
 settings = context.config.attributes.get("settings") or load_settings()
 settings.data_dir.mkdir(parents=True, exist_ok=True)
 
+
+def _include_object(obj, name, type_, reflected, compare_to):
+    # 全文检索表（title_fts*）在迁移里手写，不归 autogenerate 管
+    return not (type_ == "table" and name and name.startswith("title_fts"))
+
+
 engine = make_engine(settings)
 with engine.connect() as connection:
     # SQLite 改表结构需要 batch 模式
-    context.configure(connection=connection, target_metadata=Base.metadata, render_as_batch=True)
+    context.configure(
+        connection=connection,
+        target_metadata=Base.metadata,
+        render_as_batch=True,
+        include_object=_include_object,
+    )
     with context.begin_transaction():
         context.run_migrations()
 engine.dispose()

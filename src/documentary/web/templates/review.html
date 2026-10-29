@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "_macros.html" import poster, theme_tags %}
+{% block title %}审核 · 纪录片跟踪{% endblock %}
+{% block content %}
+<h1>审核 <small class="muted">待审核 {{ total }} 条</small></h1>
+{% if not groups %}
+<p class="card muted">没有待审核的条目。</p>
+{% endif %}
+{% for brand, items in groups %}
+{% set n_inc = items|selectattr("screen_suggestion", "equalto", "include")|list|length %}
+{% set n_exc = items|selectattr("screen_suggestion", "equalto", "exclude")|list|length %}
+<section class="card group">
+  <h2>{{ brand.code ~ " " ~ brand.name if brand else "其他" }}
+    <small class="muted">{{ items|length }} 条：建议收录 {{ n_inc }}、建议排除 {{ n_exc }}、需人工 {{ items|length - n_inc - n_exc }}</small>
+  </h2>
+  <div class="groupbtns">
+    <form method="post" action="/review-group" onsubmit="return confirm('把这一组 {{ items|length }} 条全部收录？')">
+      <input type="hidden" name="brand_id" value="{{ brand.id if brand else '' }}">
+      <button name="mode" value="all">全部收录</button>
+    </form>
+    <form method="post" action="/review-group" onsubmit="return confirm('建议收录的收录、建议排除的排除，需人工的留下。继续？')">
+      <input type="hidden" name="brand_id" value="{{ brand.id if brand else '' }}">
+      <button name="mode" value="suggested">按建议处理</button>
+    </form>
+  </div>
+  {% for t in items %}
+  <article class="item" id="t{{ t.id }}">
+    {{ poster(t) }}
+    <div class="body">
+      <h3><a href="/title/{{ t.id }}">{{ t.display_title }}</a>
+        {% if t.title_zh and t.title_en %}<small class="muted">{{ t.title_en }}</small>{% endif %}</h3>
+      <p class="meta">{{ t.year or "—" }} · {{ KINDS.get(t.kind) }} · 原始语种 {{ t.original_language or "—" }}
+        · {{ t.seasons|length }} 季 {{ theme_tags(t) }}</p>
+      <p class="sugg s-{{ t.screen_suggestion or 'none' }}"><b>{{ SUGGESTION_ZH[t.screen_suggestion] }}</b>
+        {% for r in t.screen_reasons %}<br>· {{ r }}{% endfor %}</p>
+      <details class="overview"><summary>简介</summary>{{ t.overview_zh or t.overview_en or "（没有简介）" }}</details>
+      <form class="actions" method="post" action="/review/{{ t.id }}" hx-post="/review/{{ t.id }}" hx-target="#t{{ t.id }}" hx-swap="outerHTML">
+        <button name="action" value="include" class="ok">收录</button>
+        <input name="reason" placeholder="排除理由（可不填）">
+        <button name="action" value="exclude" class="bad">排除</button>
+        <details class="themes-edit">
+          <summary>改主题再收录</summary>
+          <input type="hidden" name="edit_themes" value="">
+          {% set mine = t.themes|map(attribute="theme.key")|list %}
+          <div class="themegrid">
+          {% for th in themes %}
+            <label class="{{ 'parent' if not th.parent_key }}"><input type="checkbox" name="themes" value="{{ th.key }}" {% if th.key in mine %}checked{% endif %}
+              onchange="this.form.edit_themes.value='1'"> {{ th.name }}</label>
+          {% endfor %}
+          </div>
+        </details>
+      </form>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endfor %}
+{% endblock %}

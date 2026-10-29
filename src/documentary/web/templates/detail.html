@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "_macros.html" import poster, theme_tags, tracking_badge %}
+{% block title %}{{ t.display_title }} · 纪录片跟踪{% endblock %}
+{% block content %}
+<section class="card detail">
+  {{ poster(t, "poster large") }}
+  <div class="body">
+    <h1>{{ t.display_title }} {{ tracking_badge(t.tracking_status) }}</h1>
+    {% if t.title_en and t.title_en != t.display_title %}<p class="muted">{{ t.title_en }}</p>{% endif %}
+    {% if t.title_original and t.title_original not in (t.title_en, t.title_zh) %}<p class="muted">原名：{{ t.title_original }}</p>{% endif %}
+    <p class="meta">{{ t.year or "—" }} · {{ KINDS.get(t.kind) }} · 原始语种 {{ t.original_language or "—" }}
+      {% if t.brand %}· {{ t.brand.code }} {{ t.brand.name }}{% endif %}
+      {% if t.series_watch %}· 重点栏目 {{ t.series_watch.name }}{% endif %}
+      {% if t.release_date %}· 首播 {{ t.release_date }}{% endif %}
+      {% if t.upcoming_date %}· 下一集 {{ t.upcoming_date }}{% endif %}</p>
+    {% if t.producers %}<p class="meta">出品：{{ t.producers|join("、") }}</p>{% endif %}
+    <p>{{ theme_tags(t) }}</p>
+    <p class="overview">{{ t.overview_zh or t.overview_en or "（没有简介）" }}</p>
+    {% if t.overview_zh and t.overview_en %}<details><summary>英文简介</summary><p>{{ t.overview_en }}</p></details>{% endif %}
+    <p class="meta">
+      {% for r in ratings %}<span class="rating">{{ r.source|upper }} {{ "%.1f"|format(r.score or 0) }}<small>（{{ r.votes }} 人，截至 {{ r.confirmed_at|localtime("%Y-%m-%d") }}）</small></span> {% endfor %}
+      {% for name, url in refs.items() %}<a href="{{ url }}" target="_blank" rel="noopener">{{ name }} ↗</a> {% endfor %}
+    </p>
+  </div>
+</section>
+
+{% if t.tracking_status == "included" %}
+  {% include "_library.html" %}
+{% else %}
+<section class="card"><p class="muted">只有“已收录”的作品才标记片源状态。{% if t.seasons %}共 {{ t.seasons|length }} 季。{% endif %}</p></section>
+{% endif %}
+
+<section class="card">
+  <h2>跟踪状态</h2>
+  <p>{{ tracking_badge(t.tracking_status) }} {{ t.tracking_reason or "" }}</p>
+  {% if t.screen_reasons %}
+  <p class="sugg s-{{ t.screen_suggestion or 'none' }}"><b>初筛：{{ SUGGESTION_ZH[t.screen_suggestion] }}</b>
+    {% for r in t.screen_reasons %}<br>· {{ r }}{% endfor %}</p>
+  {% endif %}
+  <form class="inline" method="post" action="/title/{{ t.id }}/tracking">
+    改为 <select name="status">{% for k, v in TRACKING_ZH.items() if k != t.tracking_status %}<option value="{{ k }}">{{ v }}</option>{% endfor %}</select>
+    <input name="reason" placeholder="理由（可不填）"> <button>保存</button>
+  </form>
+  <details>
+    <summary>改主题</summary>
+    <form method="post" action="/title/{{ t.id }}/themes">
+      {% set mine = t.themes|map(attribute="theme.key")|list %}
+      <div class="themegrid">
+      {% for th in themes %}
+        <label class="{{ 'parent' if not th.parent_key }}"><input type="checkbox" name="themes" value="{{ th.key }}" {% if th.key in mine %}checked{% endif %}> {{ th.name }}</label>
+      {% endfor %}
+      </div>
+      <button>保存主题</button>
+    </form>
+  </details>
+  <h3>状态历史</h3>
+  {% if history %}
+  <table>
+    <thead><tr><th>时间</th><th>变化</th><th>谁</th><th>理由</th></tr></thead>
+    <tbody>
+    {% for e in history %}
+      <tr><td>{{ e.at|localtime("%Y-%m-%d %H:%M") }}</td>
+        <td>{{ TRACKING_ZH.get(e.old_value, e.old_value) if e.old_value else "（新发现）" }} → {{ TRACKING_ZH.get(e.new_value, e.new_value) }}</td>
+        <td>{{ ACTOR_ZH.get(e.actor, e.actor) }}{% if e.run_id %} · 任务 #{{ e.run_id }}{% endif %}</td>
+        <td>{{ e.reason or "" }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p class="muted">没有记录。</p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,95 @@
+{
+ "id": 900101,
+ "name": "Seven Worlds, One Planet",
+ "original_name": "Seven Worlds, One Planet",
+ "original_language": "en",
+ "first_air_date": "2019-10-27",
+ "overview": "Each episode explores a different continent and the animals that live there.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 4,
+   "name": "BBC One",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 9050,
+   "name": "BBC Studios Natural History Unit",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "wildlife"
+   },
+   {
+    "id": 1001,
+    "name": "continent"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": "tt9000101",
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "TW",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "七个世界，一个星球",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 8.6,
+ "vote_count": 300,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 81011,
+   "season_number": 1,
+   "air_date": "2019-10-27",
+   "episode_count": 7,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

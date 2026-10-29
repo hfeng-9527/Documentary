@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "_macros.html" import poster, tracking_badge %}
+{% block title %}搜索 · 纪录片跟踪{% endblock %}
+{% block content %}
+<h1>搜索 <small class="muted">“{{ q }}”：{{ results|length }} 条</small></h1>
+{% if q and not results %}<p class="card muted">没找到。可以换个说法，比如英文名或中文名的一部分。</p>{% endif %}
+<div class="rows">
+{% for t in results %}
+  <article class="item">
+    {{ poster(t, "poster small") }}
+    <div class="body">
+      <h3><a href="/title/{{ t.id }}">{{ t.display_title }}</a>
+        {% if t.title_zh and t.title_en %}<small class="muted">{{ t.title_en }}</small>{% endif %}
+        {{ tracking_badge(t.tracking_status) }}</h3>
+      <p class="meta">{{ t.year or "—" }} · {{ KINDS.get(t.kind) }}{% if t.brand %} · {{ t.brand.name }}{% endif %}</p>
+    </div>
+  </article>
+{% endfor %}
+</div>
+{% endblock %}

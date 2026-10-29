@@ -1,0 +1,95 @@
+{
+ "id": 900205,
+ "name": "Money, Explained",
+ "original_name": "Money, Explained",
+ "original_language": "en",
+ "first_air_date": "2021-05-11",
+ "overview": "From credit cards to student loans, this series explains how money really works.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 213,
+   "name": "Netflix",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 901,
+   "name": "Vox Media",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "money"
+   },
+   {
+    "id": 1001,
+    "name": "economy"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": null,
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "CN",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "理财大揭秘",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 7.4,
+ "vote_count": 150,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 82051,
+   "season_number": 1,
+   "air_date": "2021-05-11",
+   "episode_count": 5,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

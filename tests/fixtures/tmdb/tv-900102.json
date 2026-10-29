@@ -1,0 +1,74 @@
+{
+ "id": 900102,
+ "name": "Frozen Frontier",
+ "original_name": "Frozen Frontier",
+ "original_language": "en",
+ "first_air_date": "2099-03-01",
+ "overview": "A future series about the polar regions and the ocean beneath the ice.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 6852,
+   "name": "BBC Earth",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 9050,
+   "name": "BBC Studios Natural History Unit",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": []
+ },
+ "external_ids": {
+  "imdb_id": null,
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 0,
+ "vote_count": 0,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 81021,
+   "season_number": 1,
+   "air_date": "2099-03-01",
+   "episode_count": 5,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

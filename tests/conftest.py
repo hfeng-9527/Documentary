@@ -17,3 +17,10 @@ def config_dir(tmp_path: Path) -> Path:
 @pytest.fixture
 def settings(tmp_path: Path, config_dir: Path) -> Settings:
     return Settings(_env_file=None, data_dir=tmp_path / "data", config_dir=config_dir)
+
+
+@pytest.fixture
+def tmdb_settings(settings: Settings) -> Settings:
+    from tmdb_mock import KEY
+
+    return settings.model_copy(update={"tmdb_api_key": KEY})

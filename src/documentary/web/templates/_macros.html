@@ -1,0 +1,29 @@
+{# 共用的小块：海报、片源按钮、跟踪状态标签、评分 #}
+
+{% macro poster(t, cls="poster") -%}
+  {% if t.poster_path %}<img class="{{ cls }}" src="{{ POSTER_BASE }}{{ t.poster_path }}" alt="" loading="lazy">
+  {% else %}<div class="{{ cls }} noposter">无海报</div>{% endif %}
+{%- endmacro %}
+
+{% macro tracking_badge(status) -%}
+  <span class="tag t-{{ status }}">{{ TRACKING_ZH.get(status, status) }}</span>
+{%- endmacro %}
+
+{% macro rating(r) -%}
+  {% if r and r[0] %}<span class="rating">TMDB {{ "%.1f"|format(r[0]) }}<small>（{{ r[1] }} 人）</small></span>{% endif %}
+{%- endmacro %}
+
+{# 片源状态三个按钮。url：提交地址；current：当前状态；target：htmx 要替换的元素；confirm：先确认 #}
+{% macro lib_buttons(url, current, target, label="", confirm="") -%}
+  <form class="libbtns" hx-post="{{ url }}" hx-target="{{ target }}" hx-swap="outerHTML" action="{{ url }}" method="post"
+    {% if confirm %}hx-confirm="{{ confirm }}" onsubmit="return confirm(this.getAttribute('hx-confirm'))"{% endif %}>
+    {% if label %}<span class="muted">{{ label }}</span>{% endif %}
+    {% for key, name in LIBRARY_ZH.items() %}
+      <button type="submit" name="status" value="{{ key }}" class="lib {{ key }}{% if key == current %} on{% endif %}">{{ name }}</button>
+    {% endfor %}
+  </form>
+{%- endmacro %}
+
+{% macro theme_tags(t) -%}
+  {% for tt in t.themes %}<span class="tag theme" title="来源：{{ ORIGIN_ZH.get(tt.origin, tt.origin) }}{% if tt.confirmed %}，已确认{% endif %}">{{ tt.theme.name }}</span>{% endfor %}
+{%- endmacro %}

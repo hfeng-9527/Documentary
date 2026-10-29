@@ -98,3 +98,20 @@ def test_settings_errors(monkeypatch):
     text = str(e.value)
     assert "WEB_PORT：应该是整数" in text
     assert "PROXY_URL：要以 http:// 或 socks5:// 开头" in text
+
+
+def test_rules_unknown_theme(config_dir):
+    _edit(config_dir / "rules.yaml", "  science.math:", "  science.maths:")
+    r = check_config(config_dir)
+    assert "rules.yaml themes：science.maths 不在 themes.yaml 里" in r.errors
+
+
+def test_rules_bad_field(config_dir):
+    _edit(config_dir / "rules.yaml", "    tmdb_genres: [10763]", "    tmdb_genre: [10763]")
+    r = check_config(config_dir)
+    assert any("rules.yaml 字段 exclude.2.tmdb_genre：多余的字段" in e for e in r.errors)
+
+
+def test_tmdb_key_blank_is_none(tmp_path):
+    s = Settings(_env_file=None, data_dir=tmp_path, tmdb_api_key="  ")
+    assert s.tmdb_api_key is None

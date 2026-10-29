@@ -1,0 +1,162 @@
+# 初筛规则（scope.md 第 6 节；迭代 1 起）。只产生“建议”，最后由你在审核页决定。
+#
+# languages   原始语种（TMDB original_language）在这里面的才建议收录；其他语种建议排除，
+#             理由写“非中英原产，需确认有英文配音”（scope.md 第 1 节）。cn 是 TMDB 对粤语的写法。
+# themes      主题 key（themes.yaml 里的）→ 关键词：
+#               tmdb  TMDB 关键词，整个词相同才算（不分大小写）
+#               text  标题和简介里出现的词：英文按整词匹配（不分大小写），中文按包含匹配
+# exclude     疑似不收的类型（scope.md 第 1 节“不收”）。命中任一项就建议排除，理由写明命中了什么：
+#               tmdb_genres  TMDB 类型编号（10764 真人秀、10763 新闻、10767 脱口秀）
+#               tmdb / text  同上
+#
+# 改完运行 uv run doc check-config 检查格式。规则只影响以后新发现的条目（重新判断旧条目是迭代 2a 的 doc reclassify）。
+
+languages: [en, zh, cn]
+
+themes:
+  science:
+    tmdb: [science, scientist, scientific research, experiment]
+    text: [science, scientist, scientific, 科学, 科学家]
+  science.space:
+    tmdb: [space, outer space, astronomy, universe, planet, solar system, black hole, astronaut, cosmology]
+    text: [universe, cosmos, galaxy, galaxies, black hole, astronomy, astronomer, solar system, 宇宙, 天文, 星系, 黑洞]
+  science.physics:
+    tmdb: [physics, quantum mechanics, particle physics]
+    text: [physics, quantum, 物理, 量子]
+  science.chemistry:
+    tmdb: [chemistry, chemical]
+    text: [chemistry, 化学]
+  science.life:
+    tmdb: [evolution, biology, genetics, dna, dinosaur, prehistory]
+    text: [evolution, biology, genetics, dinosaur, dinosaurs, 进化, 演化, 生物学, 恐龙]
+  science.medicine:
+    tmdb: [medicine, human body, brain, disease, virus, pandemic, health]
+    text: [human body, the brain, medicine, medical, disease, virus, 人体, 医学, 疾病, 病毒]
+  science.math:
+    tmdb: [mathematics, mathematician]
+    text: [mathematics, mathematician, 数学]
+  science.earth:
+    tmdb: [climate change, global warming, geology, volcano, earthquake, weather]
+    text: [climate change, global warming, geology, volcano, volcanoes, earthquake, 气候, 地质, 火山, 地震]
+
+  engineering:
+    tmdb: [engineering, technology, invention]
+    text: [engineering, engineer, engineers, technology, invention, 工程, 科技, 技术]
+  engineering.megaprojects:
+    tmdb: [architecture, construction, skyscraper, bridge, megastructure]
+    text: [skyscraper, megastructure, bridge building, construction, 超级工程, 摩天大楼, 大桥]
+  engineering.transport:
+    tmdb: [aviation, airplane, railway, train, space exploration, rocket, car]
+    text: [aviation, aircraft, railway, rocket, spacecraft, 航空, 航天, 铁路, 火箭]
+  engineering.manufacturing:
+    tmdb: [factory, manufacturing, industry]
+    text: [factory, factories, manufacturing, 工厂, 制造]
+  engineering.energy:
+    tmdb: [energy, nuclear power, renewable energy, oil]
+    text: [nuclear power, renewable energy, electricity, 能源, 核电]
+  engineering.accidents:
+    tmdb: [disaster, engineering disaster, plane crash, nuclear disaster]
+    text: [disaster, catastrophe, collapse, 灾难, 事故]
+  engineering.computing:
+    tmdb: [computer, internet, artificial intelligence, robot, silicon valley]
+    text: [computer, computers, internet, artificial intelligence, robot, robots, 计算机, 互联网, 人工智能, 机器人]
+
+  history:
+    tmdb: [history, historical, ancient history]
+    text: [history, historian, historical, 历史]
+  history.ancient:
+    tmdb: [archaeology, ancient egypt, ancient rome, ancient greece, pyramid, ancient civilization]
+    text: [archaeology, archaeologist, ancient, pharaoh, pyramids, 考古, 古代, 文明]
+  history.china:
+    tmdb: [china, chinese history, dynasty]
+    text: [dynasty, 朝, 中国历史, 故宫]
+  history.war:
+    tmdb: [world war ii, world war i, war, military, vietnam war, cold war]
+    text: [world war, warfare, military, battle, 战争, 二战, 军事]
+  history.modern:
+    tmdb: [20th century, cold war, space race]
+    text: [twentieth century, 20th century, cold war, 近代, 现代史]
+
+  economics:
+    tmdb: [economy, economics, business]
+    text: [economy, economic, economics, 经济]
+  economics.finance:
+    tmdb: [money, finance, banking, stock market, financial crisis]
+    text: [money, finance, financial, banking, wall street, 金融, 货币]
+  economics.business:
+    tmdb: [company, entrepreneur, corporation, brand]
+    text: [company, companies, entrepreneur, corporation, 企业, 公司, 商业]
+  economics.industry:
+    tmdb: [globalization, trade, supply chain]
+    text: [globalization, global trade, supply chain, 全球化, 产业]
+
+  humanities:
+    tmdb: [culture, art, philosophy]
+    text: [culture, 文化, 人文]
+  humanities.architecture:
+    tmdb: [art, painting, design, artist]
+    text: [painting, painter, artist, design, 艺术, 设计, 建筑]
+  humanities.philosophy:
+    tmdb: [philosophy, religion]
+    text: [philosophy, philosopher, religion, 哲学, 宗教]
+  humanities.literature:
+    tmdb: [literature, writer, poetry]
+    text: [literature, novelist, poetry, 文学, 诗歌]
+  humanities.food:
+    tmdb: [food, cooking, cuisine, chef, restaurant]
+    text: [food, cooking, cuisine, chef, chefs, 美食, 饮食, 舌尖]
+  humanities.local:
+    tmdb: [travel, travelogue]
+    text: [travel, journey through, 风土, 旅行]
+  humanities.craft:
+    tmdb: [craftsmanship, craft]
+    text: [craftsman, craftsmen, artisan, 匠人, 手艺]
+
+  nature:
+    tmdb: [nature, wildlife, animal, animals, natural history, planet earth]
+    text: [nature, wildlife, wild, animal, animals, 自然, 野生, 动物]
+  nature.wildlife:
+    tmdb: [wildlife, animal, animals, predator, bird, insect, mammal]
+    text: [wildlife, predator, predators, animals, species, 野生动物, 动物]
+  nature.ocean:
+    tmdb: [ocean, sea, underwater, marine life, shark, whale, coral reef]
+    text: [ocean, oceans, underwater, marine, shark, sharks, whale, whales, coral, 海洋, 深海]
+  nature.geography:
+    tmdb: [landscape, mountain, desert, river, island, national park]
+    text: [landscape, landscapes, mountains, desert, rainforest, 地理, 山川, 风光]
+
+exclude:
+  - key: true_crime
+    label: 真实犯罪
+    tmdb: [true crime, serial killer, murder, murder investigation, crime, cold case, kidnapping]
+    text: [true crime, serial killer, murder, murders, murdered, killer, 谋杀, 杀人, 凶手, 罪案]
+  - key: reality
+    label: 真人秀
+    tmdb_genres: [10764, 10767]
+    tmdb: [reality show, reality tv, competition]
+    text: [reality series, competition series, 真人秀]
+  - key: news
+    label: 时政/新闻
+    tmdb_genres: [10763]
+    tmdb: [politics, politician, election, journalism]
+    text: [election, politician, president trump, 时政, 选举]
+  - key: sport
+    label: 体育
+    tmdb: [sport, sports, football, soccer, basketball, formula 1, boxing, athlete, olympics]
+    text: [football, soccer, basketball, formula 1, boxing, athlete, athletes, olympic, 体育, 足球, 篮球]
+  - key: music
+    label: 音乐/明星
+    tmdb: [music, musician, concert, singer, band, hip-hop, celebrity, rapper]
+    text: [musician, concert, singer, rapper, pop star, 歌手, 演唱会, 明星]
+  - key: biography
+    label: 人物传记
+    tmdb: [biography]
+    text: []
+  - key: pseudoscience
+    label: 伪科学
+    tmdb: [ufo, aliens, paranormal, ghost, conspiracy]
+    text: [ufo, ufos, paranormal, ghost, ghosts, conspiracy, 外星人, 灵异]
+  - key: docudrama
+    label: 纪实剧/重演
+    tmdb: [docudrama]
+    text: [docudrama, dramatization, dramatized, 纪实剧]

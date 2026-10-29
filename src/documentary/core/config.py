@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     web_host: str = "127.0.0.1"
     web_port: int = 8000
     log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
+    tmdb_api_key: str | None = None
 
     @field_validator("data_dir", "config_dir")
     @classmethod
@@ -46,6 +47,11 @@ class Settings(BaseSettings):
             raise ValueError("要以 http:// 或 socks5:// 开头，例如 http://127.0.0.1:10808")
         return v
 
+    @field_validator("tmdb_api_key", mode="before")
+    @classmethod
+    def _blank_is_none(cls, v: Any) -> Any:
+        return v.strip() or None if isinstance(v, str) else v
+
     @field_validator("log_level", mode="before")
     @classmethod
     def _upper(cls, v: Any) -> Any:
@@ -54,6 +60,10 @@ class Settings(BaseSettings):
     @property
     def db_path(self) -> Path:
         return self.data_dir / "documentary.db"
+
+    @property
+    def raw_db_path(self) -> Path:
+        return self.data_dir / "raw.db"
 
 
 def load_settings() -> Settings:
@@ -143,6 +153,25 @@ class Award(_Item):
     tmdb_movie_id: int | None
 
 
+class KeywordRule(_Item):
+    tmdb: list[str] = []
+    text: list[str] = []
+
+
+class ExcludeRule(KeywordRule):
+    key: str
+    label: str
+    tmdb_genres: list[int] = []
+
+
+class Rules(_Item):
+    """config/rules.yaml：初筛规则。"""
+
+    languages: list[str] = []
+    themes: dict[str, KeywordRule] = {}
+    exclude: list[ExcludeRule] = []
+
+
 # 文件名 → (顶层键, 条目格式, 用来称呼条目的字段, 统计“还没查编号”的判断)
 _FILES: dict[str, tuple[str, type[_Item], str, Any]] = {
     "brands.yaml": (
@@ -173,6 +202,16 @@ class Catalog:
     themes: list[Theme] = field(default_factory=list)
     includes: list[Include] = field(default_factory=list)
     awards: list[Award] = field(default_factory=list)
+    rules: Rules = field(default_factory=Rules)
+
+    def theme_names(self) -> dict[str, str]:
+        """主题 key → 显示名（子类带上大类，如“科学 · 宇宙/天文”）。"""
+        names: dict[str, str] = {}
+        for t in self.themes:
+            names[t.key] = t.name
+            for ch in t.children:
+                names[ch.key] = f"{t.name} · {ch.name}"
+        return names
 
 
 @dataclass
@@ -197,6 +236,10 @@ def check_config(config_dir: Path) -> CheckResult:
         if missing is not None:
             stat.missing_ids = sum(1 for it in items if missing(it))
         result.stats[fname] = stat
+    rules = _load_rules(config_dir / "rules.yaml", result.errors)
+    if rules is not None:
+        result.catalog.rules = rules
+        result.stats["rules.yaml"] = FileStat(count=len(rules.themes) + len(rules.exclude))
     _cross_check(result)
     return result
 
@@ -237,6 +280,36 @@ def _load_file(path: Path, top: str, model: type[_Item], ident: str, errors: lis
     return items
 
 
+def _load_rules(path: Path, errors: list[str]) -> Rules | None:
+    if not path.is_file():
+        errors.append(f"rules.yaml：找不到文件（{path}）")
+        return None
+    try:
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except yaml.YAMLError as e:
+        mark = getattr(e, "problem_mark", None)
+        where = f"第 {mark.line + 1} 行" if mark else ""
+        errors.append(f"rules.yaml {where}：YAML 格式错误（{getattr(e, 'problem', e)}）")
+        return None
+    try:
+        return Rules.model_validate(data)
+    except ValidationError as e:
+        for err in e.errors():
+            loc = ".".join(str(p) for p in err["loc"])
+            errors.append(f"rules.yaml 字段 {loc}：{_zh(err)}")
+        return None
+
+
+def load_catalog(config_dir: Path) -> Catalog:
+    """读配置给采集任务用；有错误时抛 ConfigError（先运行 doc check-config 看详情）。"""
+    result = check_config(config_dir)
+    if not result.ok:
+        raise ConfigError(
+            ["config/ 里的配置有错误，先运行 uv run doc check-config 查看：", *result.errors]
+        )
+    return result.catalog
+
+
 def _cross_check(r: CheckResult) -> None:
     c = r.catalog
 
@@ -273,6 +346,9 @@ def _cross_check(r: CheckResult) -> None:
     refs("brands.yaml", "code", "default_themes", c.brands)
     refs("channels.yaml", "key", "default_themes", c.channels)
     refs("series.yaml", "key", "themes", c.series)
+    for key in c.rules.themes:
+        if key not in theme_keys:
+            r.errors.append(f"rules.yaml themes：{key} 不在 themes.yaml 里")
 
     brand_codes = {b.code for b in c.brands}
     unknown: set[str] = set()

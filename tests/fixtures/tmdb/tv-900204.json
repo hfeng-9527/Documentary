@@ -1,0 +1,67 @@
+{
+ "id": 900204,
+ "name": "Untold Stories",
+ "original_name": "Untold Stories",
+ "original_language": "en",
+ "first_air_date": "2021-06-01",
+ "overview": "Stories you have never heard before.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 213,
+   "name": "Netflix",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [],
+ "keywords": {
+  "results": []
+ },
+ "external_ids": {
+  "imdb_id": null,
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 6.5,
+ "vote_count": 30,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 82041,
+   "season_number": 1,
+   "air_date": "2021-06-01",
+   "episode_count": 5,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

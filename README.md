@@ -60,7 +60,14 @@ uv sync
 Copy-Item .env.example .env
 ```
 
-`.env` 里是数据目录、代理、网页端口和密钥，每一项的说明写在文件里。迭代 0 不需要改。
+`.env` 里是数据目录、代理、网页端口和密钥，每一项的说明写在文件里。
+要采集 TMDB 数据，加一行你的 TMDB API key（申请步骤见 `docs/sessions.md` 第 6.1 节）：
+
+```
+TMDB_API_KEY=你的32位key
+```
+
+已有 `.env` 的（迭代 0 复制过的）直接在里面加这一行，不用重新复制。
 `.env` 只在你电脑上，不会提交到 GitHub。
 
 ### 4. 初始化数据库、检查配置
@@ -80,6 +87,21 @@ uv run doc web
 
 浏览器打开 http://localhost:8000 。在 PowerShell 窗口按 `Ctrl+C` 停止。
 
+### 6. 采集数据（TMDB）
+
+TMDB 在境外，要开着代理（`.env` 里的 `PROXY_URL`）。
+
+```powershell
+uv run doc discover --source tmdb --dry-run   # 先预览：只抓取和初筛，列出会新增什么，不写数据库
+uv run doc discover --source tmdb             # 正式运行
+```
+
+- 现在只跑试点：品牌 BBC Earth（UK-2）、Netflix（ST-1），重点栏目 NOVA、Horizon、Inside the Factory。
+- 第一次从品牌起始年份全部查一遍，要几分钟；以后再运行只查新出的，已经有的不会重复。
+- 只跑一个：`--brand UK-2` 或 `--series nova`。
+- 某个品牌失败不影响其他品牌，下次从它自己上次成功的时间接着查。
+- 跑完到网页的“审核”页处理新发现的条目。
+
 ## 命令一览
 
 | 命令 | 作用 |
@@ -87,6 +109,7 @@ uv run doc web
 | `uv run doc version` | 显示版本号 |
 | `uv run doc check-config` | 检查配置，结果记一条运行记录 |
 | `uv run doc db upgrade` | 建库 / 升级表结构 |
+| `uv run doc discover --source tmdb` | 发现新内容（`--brand`、`--series` 只跑一个，`--dry-run` 只预览） |
 | `uv run doc web` | 启动网页 |
 | `uv run doc --help` | 全部命令的帮助 |
 

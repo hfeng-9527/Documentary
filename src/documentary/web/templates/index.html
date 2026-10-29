@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
+{% if db.up_to_date %}
+<section class="card">
+  <h2>概览</h2>
+  <div class="stats">
+    <a href="/review"><b>{{ counts.get("pending", 0) }}</b>待审核</a>
+    <a href="/titles"><b>{{ counts.get("included", 0) }}</b>已收录</a>
+    <a href="/to-download?library=planned"><b>{{ counts.get("planned_titles", 0) }}</b>有计划中</a>
+    <a href="/titles?library=have"><b>{{ counts.get("have_titles", 0) }}</b>全部已入库</a>
+    <a href="/titles?status=upcoming"><b>{{ counts.get("upcoming", 0) }}</b>待播</a>
+    <a href="/titles?status=excluded"><b>{{ counts.get("excluded", 0) }}</b>已排除</a>
+  </div>
+  {% if last_discover %}
+  {% set st = last_discover.stats %}
+  <p>最近一次发现新内容：{{ last_discover.finished_at|localtime }}，
+    <span class="status {{ last_discover.status }}">{{ STATUS_ZH.get(last_discover.status, last_discover.status) }}</span>，
+    新增 {{ st.get("new", 0) }} 条。</p>
+  {% if st.get("fatal") %}<p class="errors">✗ {{ st.fatal }}</p>{% endif %}
+  {% for key, t in st.get("targets", {}).items() if t.error %}
+    <p class="errors">✗ {{ key }}：{{ t.error }}</p>
+  {% endfor %}
+  {% else %}
+  <p class="muted">还没有采集过数据。运行 <code>uv run doc discover --source tmdb</code>。</p>
+  {% endif %}
+</section>
+{% endif %}
+
 <section class="card">
   <h2>配置检查
     {% if check.ok %}<span class="badge ok">通过</span>{% else %}<span class="badge bad">有错误</span>{% endif %}

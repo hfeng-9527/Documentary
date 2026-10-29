@@ -1,0 +1,84 @@
+{
+ "id": 72793,
+ "name": "Inside the Factory",
+ "original_name": "Inside the Factory",
+ "original_language": "en",
+ "first_air_date": "2015-08-11",
+ "overview": "Gregg Wallace and Cherry Healey go behind the scenes of factories.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 332,
+   "name": "BBC Two",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "factory"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": "tt4935896",
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "CN",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "工厂大揭秘",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 7.8,
+ "vote_count": 60,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 85001,
+   "season_number": 1,
+   "air_date": "2015-08-11",
+   "episode_count": 2,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

@@ -1,0 +1,109 @@
+{
+ "id": 900201,
+ "name": "Our Planet",
+ "original_name": "Our Planet",
+ "original_language": "en",
+ "first_air_date": "2019-04-05",
+ "overview": "Experience our planet's natural beauty and examine how climate change impacts all living creatures.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 213,
+   "name": "Netflix",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 900,
+   "name": "Silverback Films",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "nature"
+   },
+   {
+    "id": 1001,
+    "name": "wildlife"
+   },
+   {
+    "id": 1002,
+    "name": "climate change"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": "tt9253866",
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "CN",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "我们的星球",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 8.8,
+ "vote_count": 900,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 82011,
+   "season_number": 1,
+   "air_date": "2019-04-05",
+   "episode_count": 8,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  },
+  {
+   "id": 82012,
+   "season_number": 2,
+   "air_date": "2023-06-14",
+   "episode_count": 4,
+   "name": "Season 2",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 2,
+ "status": "Ended"
+}

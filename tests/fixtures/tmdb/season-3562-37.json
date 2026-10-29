@@ -1,0 +1,42 @@
+{
+ "_id": "x356237",
+ "id": 356237,
+ "season_number": 37,
+ "name": "Season 37",
+ "air_date": "2010-01-05",
+ "episodes": [
+  {
+   "id": 35623701,
+   "episode_number": 1,
+   "name": "Darwin's Darkest Hour",
+   "air_date": "2010-01-05",
+   "runtime": 53,
+   "overview": "Episode 1 overview.",
+   "season_number": 37,
+   "vote_average": 0,
+   "vote_count": 0
+  },
+  {
+   "id": 35623702,
+   "episode_number": 2,
+   "name": "Hunting the Elements",
+   "air_date": "2010-01-12",
+   "runtime": 53,
+   "overview": "Episode 2 overview.",
+   "season_number": 37,
+   "vote_average": 0,
+   "vote_count": 0
+  },
+  {
+   "id": 35623703,
+   "episode_number": 3,
+   "name": "Making Stuff",
+   "air_date": "2010-01-19",
+   "runtime": 53,
+   "overview": "Episode 3 overview.",
+   "season_number": 37,
+   "vote_average": 0,
+   "vote_count": 0
+  }
+ ]
+}

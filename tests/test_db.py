@@ -1,6 +1,15 @@
 import sqlite3
 
-from documentary.core.db import db_status, make_engine, recent_runs, record_run, upgrade
+from alembic import command
+
+from documentary.core.db import (
+    _alembic_config,
+    db_status,
+    make_engine,
+    recent_runs,
+    record_run,
+    upgrade,
+)
 
 
 def test_upgrade_creates_run_table(settings):
@@ -22,15 +31,33 @@ def test_upgrade_is_idempotent(settings):
 
 def test_upgrade_backs_up_outdated_db(settings):
     upgrade(settings)
-    # 模拟“还没升级过的旧库”：清掉表和版本号
-    con = sqlite3.connect(settings.db_path)
-    con.execute("DROP TABLE run")
-    con.execute("DELETE FROM alembic_version")
-    con.commit()
-    con.close()
+    # 模拟“还停在上一个版本的旧库”：退回到 0001
+    command.downgrade(_alembic_config(settings), "0001")
+    assert not db_status(settings).up_to_date
     status, backup = upgrade(settings)
-    assert status.up_to_date
+    assert status.up_to_date and status.current == status.head
     assert backup and (settings.data_dir / "backups").exists()
+
+
+def test_upgrade_creates_iteration1_tables(settings):
+    upgrade(settings)
+    con = sqlite3.connect(settings.db_path)
+    names = {r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    con.close()
+    assert {
+        "brand",
+        "series_watch",
+        "theme",
+        "title",
+        "season",
+        "episode",
+        "external_ref",
+        "title_theme",
+        "rating",
+        "status_event",
+        "source_checkpoint",
+        "title_fts",
+    } <= names
 
 
 def test_record_run(settings):

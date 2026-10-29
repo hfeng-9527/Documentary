@@ -1,0 +1,31 @@
+{
+ "_id": "x356252",
+ "id": 356252,
+ "season_number": 52,
+ "name": "Season 52",
+ "air_date": "2025-01-08",
+ "episodes": [
+  {
+   "id": 35625201,
+   "episode_number": 1,
+   "name": "Ancient Engineering",
+   "air_date": "2025-01-08",
+   "runtime": 53,
+   "overview": "Episode 1 overview.",
+   "season_number": 52,
+   "vote_average": 0,
+   "vote_count": 0
+  },
+  {
+   "id": 35625202,
+   "episode_number": 2,
+   "name": "Black Holes",
+   "air_date": "2025-01-15",
+   "runtime": 53,
+   "overview": "Episode 2 overview.",
+   "season_number": 52,
+   "vote_average": 0,
+   "vote_count": 0
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% from "_macros.html" import poster, rating, theme_tags, tracking_badge %}
+{% block title %}{{ "待下载" if to_download else "作品" }} · 纪录片跟踪{% endblock %}
+{% block content %}
+<h1>{{ "待下载" if to_download else "作品" }}
+  <small class="muted">{{ page.total }} 部{% if not to_download and f.status != "included" %}（{{ TRACKING_ZH[f.status] }}）{% endif %}</small></h1>
+<form class="filters card" method="get" action="{{ path }}">
+  {% if not to_download %}
+  <label>跟踪状态 <select name="status">
+    {% for k, v in TRACKING_ZH.items() %}<option value="{{ k }}" {% if f.status == k %}selected{% endif %}>{{ v }}</option>{% endfor %}
+  </select></label>
+  {% endif %}
+  <label>品牌 <select name="brand"><option value="">全部</option>
+    {% for b in brands %}<option value="{{ b.code }}" {% if f.brand == b.code %}selected{% endif %}>{{ b.code }} {{ b.name }}</option>{% endfor %}
+  </select></label>
+  <label>主题 <select name="theme"><option value="">全部</option>
+    {% for th in themes %}<option value="{{ th.key }}" {% if f.theme == th.key %}selected{% endif %}>{{ th.name }}</option>{% endfor %}
+  </select></label>
+  <label>类型 <select name="kind"><option value="">全部</option>
+    {% for k, v in KINDS.items() %}<option value="{{ k }}" {% if f.kind == k %}selected{% endif %}>{{ v }}</option>{% endfor %}
+  </select></label>
+  <label>年份 <input name="year_from" size="4" inputmode="numeric" value="{{ f.year_from or '' }}"> –
+    <input name="year_to" size="4" inputmode="numeric" value="{{ f.year_to or '' }}"></label>
+  <label>片源 <select name="library"><option value="">全部</option>
+    {% for k, v in library_filters.items() if not (to_download and k == "have") %}<option value="{{ k }}" {% if f.library == k %}selected{% endif %}>{{ v }}</option>{% endfor %}
+  </select></label>
+  <label>排序 <select name="sort">
+    {% for k, v in sorts.items() %}<option value="{{ k }}" {% if f.sort == k %}selected{% endif %}>{{ v }}</option>{% endfor %}
+  </select></label>
+  <button>筛选</button>
+  {% if to_download %}
+    <a class="chip {% if f.library == 'planned' %}on{% endif %}" href="{{ path }}?{{ f.query_string(library='' if f.library == 'planned' else 'planned', page=1) }}">只看计划中</a>
+  {% endif %}
+</form>
+
+{% if not page.rows %}<p class="card muted">没有符合条件的作品。</p>{% endif %}
+<div class="rows">
+{% for r in page.rows %}{% set t = r.title %}
+  <article class="item">
+    {{ poster(t, "poster small") }}
+    <div class="body">
+      <h3><a href="/title/{{ t.id }}">{{ t.display_title }}</a>
+        {% if t.title_zh and t.title_en %}<small class="muted">{{ t.title_en }}</small>{% endif %}
+        {% if t.tracking_status != "included" %}{{ tracking_badge(t.tracking_status) }}{% endif %}</h3>
+      <p class="meta">{{ t.year or "—" }} · {{ KINDS.get(t.kind) }}
+        {% if t.brand %}· {{ t.brand.name }}{% endif %}
+        {% if t.series_watch %}· 重点栏目{% endif %}
+        {{ rating(r.rating) }} {{ theme_tags(t) }}</p>
+      {% if t.tracking_status == "included" %}
+        {% set lib = r.library %}{% include "_row_library.html" %}
+      {% endif %}
+    </div>
+  </article>
+{% endfor %}
+</div>
+{% if page.pages > 1 %}
+<nav class="pager">
+  {% if page.page > 1 %}<a href="{{ path }}?{{ f.query_string(page=page.page - 1) }}">上一页</a>{% endif %}
+  <span class="muted">第 {{ page.page }} / {{ page.pages }} 页</span>
+  {% if page.page < page.pages %}<a href="{{ path }}?{{ f.query_string(page=page.page + 1) }}">下一页</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

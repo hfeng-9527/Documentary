@@ -119,6 +119,8 @@ flowchart TD
 | discovered_via | 发现方式：按品牌 / 重点栏目 / 频道 / 手动收录 / 奖项 / 人工补录 |
 | tracking_status | 跟踪状态（第 3.1 节） |
 | tracking_reason | 当前状态的理由，如“评分未达门槛：IMDb 6.8 / 320 人” |
+| screen_suggestion | 初筛建议：收录 / 排除 / 空（判断不了，需人工）。只是建议，不直接改跟踪状态（迭代 1 加，见 `iterations/iter-1.md` 第 4 节） |
+| screen_reasons | 初筛理由列表，如“主题：自然/地理（品牌默认）”“疑似真实犯罪：TMDB 关键词 murder” |
 | upcoming_date | 待播作品的播出日期 |
 | watch_until | `观察中` 的截止日期（上映日 + 12 个月） |
 | library_status | 片源状态（只对长片、视频；系列的在季或集上） |
@@ -162,6 +164,8 @@ flowchart TD
 | source | `tmdb` / `imdb` / `douban` / `youtube` / `jellyfin` |
 | external_id | 该来源的编号 |
 | match_method | 怎么对上的：来源自带 / 按编号 / 手动（暂不按标题自动对上） |
+
+TMDB 的剧集、电影、季、集编号各自独立编号（剧集 1966 和电影 1966 是两部不同的片），所以 TMDB 编号存成带类别的形式：`tv/1966`、`movie/603`、`season/12345`、`episode/67890`。
 
 同一个来源、同一个编号只能对应一个实体，防止重复。
 
@@ -296,8 +300,8 @@ flowchart TD
 | 迭代 | 新建的表 |
 |---|---|
 | 0 骨架 | `run` |
-| 1 TMDB 小范围 | `brand`、`series_watch`、`theme`、`title`、`season`、`episode`、`external_ref`、`title_theme`、`status_event`、`source_checkpoint`、`raw_record`（`raw.db`） |
-| 2a TMDB + IMDb | `rating`、`award`、`manual_include` |
+| 1 TMDB 小范围 | `brand`、`series_watch`、`theme`、`title`、`season`、`episode`、`external_ref`、`title_theme`、`status_event`、`source_checkpoint`、`rating`（先只存 TMDB 评分）、`raw_record`（`raw.db`） |
+| 2a TMDB + IMDb | `award`、`manual_include`（`rating` 开始存 IMDb 评分） |
 | 2b YouTube | `channel`、`youtube_video`、`watch_link` |
 | 2c 豆瓣 + 中文平台 | `manual_task` |
 | 3 定期更新 | `run` 增加排队、进度字段 |
@@ -374,3 +378,4 @@ erDiagram
 - 整体设计已确认。
 - 手动标记的 `已入库` 不会被 Jellyfin 同步改回（第 3.2 节）。
 - 个人备注、想看优先级、看过没看过：暂不加，记进 `plan.md` 待办清单。
+- 迭代 1 开始时确认（2026-10-29）：`title` 加 `screen_suggestion` / `screen_reasons`；`rating` 表提前到迭代 1 建，先只存 TMDB 评分。

@@ -1,0 +1,91 @@
+{
+ "id": 900103,
+ "name": "Planet Earth III",
+ "original_name": "Planet Earth III",
+ "original_language": "en",
+ "first_air_date": "2023-10-22",
+ "overview": "The third series of Planet Earth explores the natural world.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 4,
+   "name": "BBC One",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 9050,
+   "name": "BBC Studios Natural History Unit",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "nature"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": "tt9000103",
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "CN",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "地球脉动 第三季",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 8.9,
+ "vote_count": 500,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 81031,
+   "season_number": 1,
+   "air_date": "2023-10-22",
+   "episode_count": 8,
+   "name": "Season 1",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": false,
+ "last_episode_to_air": null,
+ "next_episode_to_air": null,
+ "number_of_seasons": 1,
+ "status": "Ended"
+}

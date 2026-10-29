@@ -1,0 +1,10 @@
+{% from "_macros.html" import lib_buttons %}
+<div class="rowlib" id="lib{{ t.id }}">
+  <span class="libsum l-{{ lib.status }}">{{ lib.text }}</span>
+  {% if t.kind == "series" %}
+    {{ lib_buttons("/library/title/" ~ t.id, None, "#lib" ~ t.id, "整部标记",
+                   "把这部作品的全部" ~ ("集（共 " ~ lib.total ~ " 集）" if t.per_episode else "季") ~ "都改成这个状态？") }}
+  {% else %}
+    {{ lib_buttons("/library/title/" ~ t.id, t.library_status, "#lib" ~ t.id) }}
+  {% endif %}
+</div>

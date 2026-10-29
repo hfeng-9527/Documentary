@@ -1,0 +1,37 @@
+{% from "_macros.html" import lib_buttons %}
+<section class="card" id="library">
+  <h2>片源 <span class="libsum l-{{ lib.status }}">{{ lib.text }}</span></h2>
+  {% if t.kind != "series" %}
+    {{ lib_buttons("/library/title/" ~ t.id, t.library_status, "#library") }}
+  {% elif not seasons %}
+    <p class="muted">TMDB 上还没有季的信息。</p>
+  {% elif not t.per_episode %}
+  <table class="seasons">
+    <thead><tr><th>季</th><th>首播</th><th>集数</th><th>片源状态</th></tr></thead>
+    <tbody>
+    {% for x in seasons %}{% set se = x.season %}
+      <tr><td>第 {{ se.season_number }} 季{% if se.name and se.name != "Season " ~ se.season_number %} <small class="muted">{{ se.name }}</small>{% endif %}</td>
+        <td>{{ se.air_date or "—" }}</td><td>{{ se.episode_count or "—" }}</td>
+        <td>{{ lib_buttons("/library/season/" ~ se.id, se.library_status, "#library") }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p class="muted">长青栏目按集记片源状态。展开一季可以逐集标记，或用“整季标记”。</p>
+    {% for x in seasons|reverse %}{% set se = x.season %}
+    <details class="season" {% if open_season == se.id %}open{% endif %}>
+      <summary>第 {{ se.season_number }} 季 <span class="muted">{{ se.air_date.year if se.air_date else "" }} · {{ x.total }} 集</span>
+        <span class="libsum">{% if x.have %}已入库 {{ x.have }}/{{ x.total }}{% endif %}{% if x.planned %} 计划中 {{ x.planned }}{% endif %}</span></summary>
+      {{ lib_buttons("/library/season/" ~ se.id ~ "/episodes", None, "#library", "整季标记") }}
+      <table class="episodes">
+        <tbody>
+        {% for ep in se.episodes %}
+          <tr><td>{{ ep.episode_number }}</td><td>{{ ep.name_zh or ep.name_en or "—" }}</td><td class="muted">{{ ep.air_date or "" }}</td>
+            <td>{{ lib_buttons("/library/episode/" ~ ep.id, ep.library_status, "#library") }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </details>
+    {% endfor %}
+  {% endif %}
+</section>

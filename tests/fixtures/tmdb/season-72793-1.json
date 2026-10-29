@@ -1,0 +1,31 @@
+{
+ "_id": "x727931",
+ "id": 7279301,
+ "season_number": 1,
+ "name": "Season 1",
+ "air_date": "2015-08-11",
+ "episodes": [
+  {
+   "id": 727930101,
+   "episode_number": 1,
+   "name": "Biscuits",
+   "air_date": "2015-08-11",
+   "runtime": 53,
+   "overview": "Episode 1 overview.",
+   "season_number": 1,
+   "vote_average": 0,
+   "vote_count": 0
+  },
+  {
+   "id": 727930102,
+   "episode_number": 2,
+   "name": "Breakfast Cereal",
+   "air_date": "2015-08-18",
+   "runtime": 53,
+   "overview": "Episode 2 overview.",
+   "season_number": 1,
+   "vote_average": 0,
+   "vote_count": 0
+  }
+ ]
+}

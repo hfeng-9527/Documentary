@@ -1,0 +1,126 @@
+{
+ "id": 3562,
+ "name": "NOVA",
+ "original_name": "NOVA",
+ "original_language": "en",
+ "first_air_date": "1974-03-03",
+ "overview": "NOVA is the highest rated science series on television.",
+ "genres": [
+  {
+   "id": 99,
+   "name": "Documentary"
+  }
+ ],
+ "networks": [
+  {
+   "id": 14,
+   "name": "PBS",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "production_companies": [
+  {
+   "id": 902,
+   "name": "WGBH",
+   "logo_path": null,
+   "origin_country": "GB"
+  }
+ ],
+ "keywords": {
+  "results": [
+   {
+    "id": 1000,
+    "name": "science"
+   }
+  ]
+ },
+ "external_ids": {
+  "imdb_id": "tt0071034",
+  "tvdb_id": null,
+  "wikidata_id": null
+ },
+ "translations": {
+  "translations": [
+   {
+    "iso_3166_1": "CN",
+    "iso_639_1": "zh",
+    "name": "普通话",
+    "english_name": "Mandarin",
+    "data": {
+     "name": "新星",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   },
+   {
+    "iso_3166_1": "US",
+    "iso_639_1": "en",
+    "name": "English",
+    "english_name": "English",
+    "data": {
+     "name": "",
+     "overview": "",
+     "homepage": "",
+     "tagline": ""
+    }
+   }
+  ]
+ },
+ "vote_average": 7.9,
+ "vote_count": 250,
+ "poster_path": null,
+ "seasons": [
+  {
+   "id": 83000,
+   "season_number": 0,
+   "air_date": null,
+   "episode_count": 3,
+   "name": "Specials",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  },
+  {
+   "id": 83036,
+   "season_number": 36,
+   "air_date": "2009-01-06",
+   "episode_count": 20,
+   "name": "Season 36",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  },
+  {
+   "id": 83037,
+   "season_number": 37,
+   "air_date": "2010-01-05",
+   "episode_count": 3,
+   "name": "Season 37",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  },
+  {
+   "id": 83052,
+   "season_number": 52,
+   "air_date": "2025-01-08",
+   "episode_count": 2,
+   "name": "Season 52",
+   "overview": "",
+   "poster_path": null,
+   "vote_average": 0
+  }
+ ],
+ "in_production": true,
+ "last_episode_to_air": null,
+ "next_episode_to_air": {
+  "id": 1,
+  "air_date": "2099-01-01",
+  "episode_number": 1,
+  "season_number": 1
+ },
+ "number_of_seasons": 3,
+ "status": "Returning Series"
+}

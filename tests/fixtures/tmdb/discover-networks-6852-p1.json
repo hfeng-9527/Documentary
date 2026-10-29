@@ -1,0 +1,25 @@
+{
+ "page": 1,
+ "total_pages": 2,
+ "total_results": 2,
+ "results": [
+  {
+   "id": 68595,
+   "name": "Planet Earth II",
+   "first_air_date": "2016-11-06",
+   "genre_ids": [
+    99
+   ],
+   "original_language": "en"
+  },
+  {
+   "id": 900101,
+   "name": "Seven Worlds, One Planet",
+   "first_air_date": "2019-10-27",
+   "genre_ids": [
+    99
+   ],
+   "original_language": "en"
+  }
+ ]
+}
