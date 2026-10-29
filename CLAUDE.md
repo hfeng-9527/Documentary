@@ -10,13 +10,14 @@
 2. `docs/scope.md` — 正式收录范围（品牌、频道、纪录长片评分门槛、主题、评分规则）
 3. `docs/tracking.md` — 双周发现新内容 + 月度刷新评分的方案
 4. `docs/requirements.md` — 需求、部署环境、大模型模块设计
+5. `docs/architecture.md` — 技术选型、模块划分、目录结构、调度与部署
 
 `docs/01`–`03` 开头的文件是早期讨论记录，结论已并入上面四份，一般不用读。
 
 ## 当前进度
 
 - 阶段 0（范围定义）：完成
-- 阶段 1（需求与技术方案）：`requirements.md` 的问题都已确认；**下一步是写 `docs/architecture.md`**（语言选型、目录结构、模块划分：采集 / 审核 / 网页 / 大模型标定）
+- 阶段 1（需求与技术方案）：`requirements.md` 已确认；`docs/architecture.md` 草稿已写（Python + FastAPI + SQLite + htmx，cron 调度），**等用户确认第 10 节的问题**
 - 阶段 2 起尚未开始
 
 ## 关键约束（细节见各文档）
