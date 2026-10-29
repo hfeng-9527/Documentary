@@ -23,13 +23,12 @@
 - 阶段 0（范围定义）：完成
 - 阶段 1（需求与技术方案）：**完成**，全部文档已确认（会话 A）
 - 阶段 2（数据设计）：**完成**（在会话 A 里做完）。交付 `data-model.md`、`source-mapping.md`、`config/*.yaml`（试点编号已核对）；新增重点栏目清单（`scope.md` 第 2.1 节）；收录总原则：知识类、科普类都收，偏娱乐性的不收；各来源之间只按编号自动对上
-- **下一步：新会话 C，迭代 0 工程骨架**（开场白见 `sessions.md` 第 5 节；`plan.md` 第 9 节）
-- 阶段 3（迭代 0–6 分步开发）尚未开始。迭代顺序：0 骨架 → 1 TMDB 小范围闭环 → **2 数据获取扩大到全部预定范围**（2a TMDB+IMDb / 2b YouTube / 2c 豆瓣+中文平台）→ 3 定期更新+报告 → 4 Jellyfin → 5 树莓派 → 6 批量审核+大模型 v1.0
+- 阶段 3：**迭代 0 工程骨架验收通过**（2026-10-29，`docs/iterations/iter-0.md`），合并到 `main` 后打 `v0.0`。**下一步：新会话 D，迭代 1 TMDB 小范围最小闭环**（开场白见 `sessions.md` 第 5 节；`plan.md` 第 9 节）。迭代顺序：0 骨架 → 1 TMDB 小范围闭环 → **2 数据获取扩大到全部预定范围**（2a TMDB+IMDb / 2b YouTube / 2c 豆瓣+中文平台）→ 3 定期更新+报告 → 4 Jellyfin → 5 树莓派 → 6 批量审核+大模型 v1.0
 
 ## 关键约束（细节见各文档）
 
 - 仅个人使用，不公开
-- 开发测试：Windows 电脑上直接运行（不用 Docker），已装 git
+- 开发测试：Windows 电脑上直接运行（不用 Docker），已装 git；用 uv 管理 Python。用户电脑的本地代理是 `127.0.0.1:10808`（外网慢时 uv、git 走它，也是 `.env` 里 `PROXY_URL` 的值）
 - 正式部署：树莓派 4（4GB，Debian，Docker），已有 Jellyfin、qBittorrent、Immich、v2ray；通过 Tailscale + SSH 远程操作
 - 数据源：TMDB API、IMDb 公开数据包、YouTube Data API、豆瓣（抓网页，半自动）；**不用 B 站**
 - 境外接口走 v2ray 代理，国内网站直连
