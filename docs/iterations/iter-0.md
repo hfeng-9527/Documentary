@@ -1,6 +1,6 @@
 # 迭代 0：工程骨架（v0.0）
 
-> 状态：计划已确认（2026-10-29）；开发和自测完成，**等你验收**（第 6 节）。
+> 状态：**验收通过**（2026-10-29）。合并到 `main` 后打标签 `v0.0`。
 > 依据：`plan.md` 第 5 节、`process.md`、`architecture.md` 第 1、4、5、7、9.5 节、`data-model.md` 第 5 节。
 > 分支：`iter-0-skeleton`。验收通过后开合并请求合并到 `main`，打标签 `v0.0`。
 
@@ -113,7 +113,7 @@
 | 1–2 装 uv、clone、`uv sync` | 通过。过程中遇到两个网络问题：git clone 被重置（git 不读 PowerShell 的代理变量，要用 `git config --global http.proxy`）；`uv sync` 下载超时（设 `UV_HTTP_TIMEOUT=120` 后重跑）。README 第 0 步已补上这两点 |
 | 3–6 `.env`、version、db upgrade、check-config | 通过，输出与清单一致 |
 | 7 故意改错 default_themes | 通过：报出 `brands.yaml（code=UK-2）字段 default_themes：natur 不在 themes.yaml 里`，改回后通过 |
-| 8 网页 | 首页、样式、htmx 都正常加载（待你确认页面内容） |
+| 8 网页 | 通过（你发了截图）：版本号、配置检查“通过”、数据库“正常”、运行记录的成功/失败颜色和本地时间都正确 |
 | 9 GitHub Actions | 通过（Ubuntu、Windows 两项都是绿色） |
 
 小问题：浏览器请求 `/favicon.ico` 返回 404（没有网站图标），不影响使用，不处理。
