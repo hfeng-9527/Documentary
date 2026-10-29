@@ -57,6 +57,32 @@
 
 已移出：FRONTLINE、VICE、Al Jazeera、NHK、ARTE。
 
+### 2.1 重点栏目（直接跟踪）
+
+> 阶段 2 新增，**待确认**。
+
+按品牌发现依赖 TMDB 把节目标成“纪录片”类型、播出方 ID 也要配对。工程/制造类节目常常不满足这两个条件，容易漏：有的在 TMDB 上被标成真人秀或其他类型，有的播出方不在品牌表里（如加拿大 Discovery）。它们还可能被“真人秀”排除规则误伤。
+
+所以另设一张**重点栏目清单**：按 TMDB 编号直接跟踪，不经过类型筛选，直接收录，并有预设主题。长青栏目按集跟踪；2010 年前开播的，只收 2010 年起播出的季和集（与第 1 节一致）。
+
+| 收录 | 栏目 | 品牌 / 播出方 | 主题 |
+|---|---|---|---|
+| [x] | *Horizon* | BBC（UK-1） | 科学 |
+| [x] | *NOVA* | PBS（US-1） | 科学 |
+| [x] | *Inside the Factory* | BBC Two（UK-1） | 工程技术 / 制造业 |
+| [x] | *How It's Made* | Discovery Canada / Science Channel | 工程技术 / 制造业 |
+| [x] | *Megafactories* / *Ultimate Factories* | National Geographic（US-5） | 工程技术 / 制造业 |
+| [x] | *Megastructures* | National Geographic（US-5） | 工程技术 / 超级工程 |
+| [x] | *Impossible Engineering* | Science Channel（US-6） | 工程技术 |
+| [x] | *Modern Marvels* | History（US-7） | 工程技术 |
+| [x] | *Mighty Ships* | Discovery Canada | 工程技术 / 交通 |
+| [x] | 《超级工程》 | CCTV（ASIA-1） | 工程技术 / 超级工程 |
+| [ ] | 《大国重器》 | CCTV（ASIA-1） | 工程技术 / 制造业（需判断是否偏主旋律） |
+| [ ] | *Food Unwrapped* | Channel 4（UK-3） | 偏消费者节目，默认不收 |
+
+- 以后加栏目只需要在清单里加一行。
+- 迭代 1、2 里会核对这些栏目在 TMDB 上的编号和类型标注，确认按品牌发现会不会漏掉它们。
+
 ---
 
 ## 3. 纪录长片（院线 + 流媒体独立长片）
