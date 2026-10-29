@@ -29,7 +29,7 @@ TMDB 免费提供 API，纪录片的分类 ID 是 `99`（电影和剧集都有�
 | 已收录系列的新季/新集 | `tv/{id}` 看 `last_episode_to_air` / `next_episode_to_air`；或 `tv/changes` 拿变更列表 |
 
 - 各品牌对应的 TMDB 播出方/公司 ID 在建库时查好，存进配置表。
-- **短板**：中文作品（央视、腾讯、优酷等）在 TMDB 上收录不全，见 2.3。
+- **短板**：中文作品（央视、腾讯、优酷等）在 TMDB 上收录不全，见 2.4。
 
 ### 2.2 YouTube → YouTube Data API
 
