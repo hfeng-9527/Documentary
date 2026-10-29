@@ -227,14 +227,15 @@
 | IMDb | 纪录片可带副类型：History、Biography、War、Crime、Sport、Music、News 等 | **History、War** 可直接映射到历史；**Crime、Sport、Music、News、Biography** 用来标出疑似要排除的 |
 | YouTube | 视频分类很粗（科学与技术、教育、新闻与政治、娱乐…） | “新闻与政治”标出疑似时政 |
 
-所以按以下优先级打主题，**不需要大模型**：
+所以按以下优先级打主题，**主服务不需要大模型**：
 
 1. **频道/品牌默认主题**：大部分独立 YouTube 频道只做一个领域（如 Veritasium = 科学，Fall of Civilizations = 历史），部分品牌和栏目也是（NOVA = 科学，*American Experience* = 历史）。配置表里给它们设默认主题。
 2. **来源自带分类**：IMDb 副类型、TMDB 关键词、YouTube 分类，按上表映射。
 3. **关键词规则**：标题和简介里的关键词（如 “economy”、“bridge”、“经济”、“工程”）。
-4. **人工审核**：以上都判断不了的，在审核时手动补。
+4. **大模型标定（可选模块）**：对前三步没判断出来的条目给出主题和排除建议，见 `requirements.md` 第 5 节。
+5. **人工审核**：以上都判断不了的，或者大模型建议需要确认的，在审核时手动补。
 
-难点在综合性的品牌和频道（National Geographic、Netflix、DW、History、Real Stories 等）：主题和排除类型都要逐条判断，人工审核量会比较大。试运行时如果觉得审核负担太重，再考虑加大模型辅助，作为可选功能。
+难点在综合性的品牌和频道（National Geographic、Netflix、DW、History、Real Stories 等）：主题和排除类型都要逐条判断，这正是大模型标定模块主要用武之地。
 
 ---
 
