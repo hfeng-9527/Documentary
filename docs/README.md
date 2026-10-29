@@ -10,7 +10,7 @@
 - [`scenarios.md`](scenarios.md) — 使用场景与页面清单
 - [`architecture.md`](architecture.md) — 技术架构
 - [`data-model.md`](data-model.md) — 数据模型
-- [`source-mapping.md`](source-mapping.md) — 来源字段映射（草稿）
+- [`source-mapping.md`](source-mapping.md) — 来源字段映射
 
 **讨论过程记录**（结论已汇总到 `scope.md` 和 `tracking.md`）：
 - [`01-scope-candidates.md`](01-scope-candidates.md) — 最初的大范围候选清单

@@ -161,7 +161,7 @@ flowchart TD
 | entity_type / entity_id | 挂在哪：作品 / 季 / 集 |
 | source | `tmdb` / `imdb` / `douban` / `youtube` / `jellyfin` |
 | external_id | 该来源的编号 |
-| match_method | 怎么对上的：来源自带 / 按编号 / 按标题 / 手动 |
+| match_method | 怎么对上的：来源自带 / 按编号 / 手动（暂不按标题自动对上） |
 
 同一个来源、同一个编号只能对应一个实体，防止重复。
 
